@@ -8,19 +8,43 @@
   --color-background: var(--background);
   --color-foreground: var(--foreground);
 
-  /* Figma Extracted Colors */
-  --color-gold-500: #826C41;
-  --color-gold-600: #876E3D;
-  --color-stone-100: #FFF6E5;
-  --color-stone-200: #EEEBE6;
-  --color-stone-300: #E5E0DA;
-  --color-stone-400: #CEC7BF;
-  --color-stone-500: #BFBFBF;
-  --color-stone-550: #8C8C8C;
-  --color-stone-600: #A1A1A1;
-  --color-stone-700: #8A7D69;
-  --color-brown-800: #39240D;
-  --color-brown-900: #1A1003;
+  /* Figma Extracted Colors: Global */
+  --color-neutral-100: #1B1B1B;
+  --color-neutral-90: #404040;
+  --color-neutral-80: #616161;
+  --color-neutral-70: #757575;
+  --color-neutral-60: #8C8C8C;
+  --color-neutral-50: #E4E4E4;
+  --color-neutral-40: #E8E8E8;
+  --color-neutral-30: #F2F2F2;
+  --color-neutral-20: #F9F9F9;
+  --color-neutral-10: #FDFDFD;
+  --color-neutral-0: #FFFFFF;
+  --color-brand-1: #FFF6E5;
+  --color-brand-2: #EEEBE6;
+  --color-brand-3: #E5E0DA;
+  --color-brand-4: #CEC7BF;
+  --color-brand-5: #8A7D69;
+  --color-brand-6: #39240D;
+  --color-error: #D20000;
+  --color-success: #108F40;
+  --color-warning: #F59E0B;
+  --color-info: #3B82F6;
+
+  /* Figma Extracted Colors: Semantic */
+  --color-foreground-primary: var(--color-neutral-100);
+  --color-foreground-secondary: var(--color-brand-6);
+  --color-foreground-tertiary: var(--color-neutral-90);
+  --color-foreground-quaternary: var(--color-brand-5);
+  --color-foreground-senary: var(--color-neutral-80);
+  --color-foreground-disable: var(--color-neutral-40);
+  --color-background-primary: var(--color-neutral-0);
+  --color-background-secondary: var(--color-brand-1);
+  --color-background-tertiary: var(--color-neutral-40);
+  --color-background-disable: var(--color-neutral-80);
+  --color-line-primary: var(--color-brand-2);
+  --color-line-secondary: var(--color-brand-3);
+  --color-button-background: color-mix(in srgb, var(--color-neutral-100) 35%, transparent);
 
   /* Fonts */
   --font-sans: var(--font-sans);
@@ -78,26 +102,21 @@
 
 @layer utilities {
   .text-h0 { font-family: var(--font-serif); font-size: 200px; font-weight: 400; line-height: 1.2; text-transform: uppercase; }
-  .text-h1 { font-family: var(--font-serif); font-size: 32px; font-weight: 400; line-height: 1.2; }
-  .text-h2 { font-family: var(--font-serif); font-size: 24px; font-weight: 400; line-height: 1.2; }
-  .text-h3 { font-family: var(--font-serif); font-size: 18px; font-weight: 400; line-height: 1.5; }
-  .text-h4 { font-family: var(--font-serif); font-size: 16px; font-weight: 400; line-height: 1.5; }
-  .text-sh1 { font-family: var(--font-sans); font-size: 24px; font-weight: 300; line-height: 1.2; }
-  .text-sh2 { font-family: var(--font-sans); font-size: 16px; font-weight: 400; line-height: 1.5; }
-  .text-sh3 { font-family: var(--font-sans); font-size: 12px; font-weight: 400; line-height: 1.5; text-transform: uppercase; }
-  .text-b1 { font-family: var(--font-sans); font-size: 14px; font-weight: 300; line-height: 1.5; }
-  .text-b2 { font-family: var(--font-sans); font-size: 12px; font-weight: 300; line-height: 1.5; }
+  .text-h1 { font-family: var(--font-serif); font-size: 28px; font-weight: 400; line-height: 1.2; @variant md { font-size: 32px; } }
+  .text-h2 { font-family: var(--font-serif); font-size: 20px; font-weight: 400; line-height: 1.2; @variant md { font-size: 24px; } }
+  .text-h3 { font-family: var(--font-serif); font-size: 16px; font-weight: 400; line-height: 1.5; @variant md { font-size: 18px; } }
+  .text-h4 { font-family: var(--font-serif); font-size: 14px; font-weight: 400; line-height: 1.5; @variant md { font-size: 16px; } }
+  .text-sh1 { font-family: var(--font-mona); font-size: 20px; font-weight: 300; line-height: 1.2; @variant md { font-size: 24px; } }
+  .text-sh2 { font-family: var(--font-mona); font-size: 14px; font-weight: 400; line-height: 1.5; @variant md { font-size: 16px; } }
+  .text-sh3 { font-family: var(--font-mona); font-size: 10px; font-weight: 400; line-height: 1.5; text-transform: uppercase; @variant md { font-size: 12px; } }
+  .text-b1 { font-family: var(--font-mona); font-size: 12px; font-weight: 300; line-height: 1.5; @variant md { font-size: 14px; } }
+  .text-b2 { font-family: var(--font-mona); font-size: 10px; font-weight: 300; line-height: 1.5; @variant md { font-size: 12px; } }
   .text-faculty-base { font-family: var(--font-display); font-size: 16px; font-weight: 400; line-height: 1.3; }
   .text-faculty-lg { font-family: var(--font-display); font-size: 32px; font-weight: 400; line-height: 1.3; }
   .text-aurum-hero { font-family: var(--font-serif); font-size: 347px; font-weight: 400; line-height: 0.9; text-transform: uppercase; }
 }
 
 :root { /* Based on the stone/cream palette */ --background: oklch(1 0 0); --foreground: oklch(0.145 0 0); --card: oklch(1 0 0); --card-foreground: oklch(0.145 0 0); --popover: oklch(1 0 0); --popover-foreground: oklch(0.145 0 0); --primary: oklch(0.205 0 0); --primary-foreground: oklch(0.985 0 0); --secondary: oklch(0.97 0 0); --secondary-foreground: oklch(0.205 0 0); --muted: oklch(0.97 0 0); --muted-foreground: oklch(0.556 0 0); --accent: oklch(0.97 0 0); --accent-foreground: oklch(0.205 0 0); --destructive: oklch(0.577 0.245 27.325); --border: oklch(0.922 0 0); --input: oklch(0.922 0 0); --ring: oklch(0.708 0 0); --chart-1: oklch(0.87 0 0); --chart-2: oklch(0.556 0 0); --chart-3: oklch(0.439 0 0); --chart-4: oklch(0.371 0 0); --chart-5: oklch(0.269 0 0); --radius: 0.625rem; --sidebar: oklch(0.985 0 0); --sidebar-foreground: oklch(0.145 0 0); --sidebar-primary: oklch(0.205 0 0); --sidebar-primary-foreground: oklch(0.985 0 0); --sidebar-accent: oklch(0.97 0 0); --sidebar-accent-foreground: oklch(0.205 0 0); --sidebar-border: oklch(0.922 0 0); --sidebar-ring: oklch(0.708 0 0);
-}
-
-body {
-  background-color: var(--background);
-  font-family: var(--font-sans);
 }
 
 .dark {
@@ -139,7 +158,7 @@ body {
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-brand-2 text-foreground;
   }
   html {
     @apply font-sans;
