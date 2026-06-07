@@ -3,9 +3,9 @@ import { TransitionLink } from "./components/TransitionLink";
 
 export default function Home() {
   return (
-    <div className="flex flex-col min-h-screen">
-      <header className="flex justify-between items-center px-12 py-8 fixed top-0 w-full z-50 text-stone-100 font-mona">
-        <div className="flex gap-[56px] uppercase tracking-widest text-sm">
+    <div className="flex flex-col h-screen overflow-hidden">
+      <header className="flex justify-between items-center px-16 py-8 fixed top-0 w-full z-50 text-stone-100 font-mona">
+        <div className="flex gap-14 uppercase tracking-widest text-sm">
           <TransitionLink
             href="#"
             className="hover:opacity-70 transition-opacity"
@@ -25,7 +25,7 @@ export default function Home() {
             Brochure
           </TransitionLink>
         </div>
-        <div className="flex gap-[56px] uppercase tracking-widest text-sm">
+        <div className="flex gap-14 uppercase tracking-widest text-sm">
           <TransitionLink
             href="#"
             className="hover:opacity-70 transition-opacity"
@@ -41,9 +41,9 @@ export default function Home() {
         </div>
       </header>
 
-      <main className="grow">
+      <main className="grow h-full">
         {/* Hero Section */}
-        <section className="relative h-screen w-full flex flex-col justify-end p-12 pb-0 text-stone-200">
+        <section className="relative h-full w-full flex flex-col justify-end p-12 pb-0 text-stone-200">
           <div className="absolute inset-0 -z-10">
             <Image
               src="/images/luxury-villa-hero.png"

@@ -1,153 +1,246 @@
-import Image from "next/image";
+"use client";
+
+import Image, { type StaticImageData } from "next/image";
 import Header from "../components/Header";
+import Footer from "../components/Footer";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef } from "react";
+import zenStones from "../../../public/images/zen-stones.png";
+import luxuryVilla from "../../../public/images/luxury-villa-exterior.png";
+import kitchenCounter from "../../../public/images/kitchen-counter-decor.png";
+import projectIntro from "../../../public/images/project-intro-video.png";
+import aurumBrand from "../../../public/images/aurum-brand-book.png";
+import { TransitionLink } from "../components/TransitionLink";
+
+const TIMELINE_ITEMS = [
+  {
+    id: "01",
+    title: "The Brief",
+    image: zenStones,
+  },
+  {
+    id: "02",
+    title: "Render",
+    image: luxuryVilla,
+  },
+  {
+    id: "03",
+    title: "Explore | Finishes",
+    image: kitchenCounter,
+  },
+  {
+    id: "04",
+    title: "Animation",
+    image: projectIntro,
+  },
+  {
+    id: "05",
+    title: "Brochure",
+    image: aurumBrand,
+  },
+];
+
+interface TimelineItemProps {
+  item: {
+    id: string;
+    title: string;
+    image: StaticImageData;
+  };
+  index: number;
+}
+
+const TimelineItem = ({ item, index }: TimelineItemProps) => {
+  const isEven = index % 2 === 0;
+  const itemRef = useRef<HTMLDivElement>(null);
+
+  const { scrollYProgress } = useScroll({
+    target: itemRef,
+    offset: ["start center", "end center"],
+  });
+
+  // Hold in place through the item, then slide up out of view as the next item enters.
+  const titleY = useTransform(scrollYProgress, [0.7, 1], ["0%", "100%"]);
+
+  return (
+    <div
+      ref={itemRef}
+      className={`relative flex items-stretch w-full gap-8 z-10 py-6 overflow-visible ${
+        isEven ? "flex-row" : "flex-row-reverse"
+      }`}
+    >
+      <div
+        className={`w-1/3 relative flex ${isEven ? "justify-end" : "justify-start"}`}
+      >
+        <div className="sticky top-1/2 h-fit overflow-hidden">
+          <motion.div
+            className="tracking-widest uppercase text-b2 flex flex-col items-start gap-4"
+            style={{ y: titleY }}
+          >
+            <span className="text-sh1 text-neutral-60">{item.id}</span>
+            <span
+              className="text-h2 text-black"
+              style={{
+                writingMode: "vertical-rl",
+                transform: "rotate(180deg)",
+              }}
+            >
+              {item.title}
+            </span>
+          </motion.div>
+        </div>
+      </div>
+
+      <div className="w-2/3 flex flex-col justify-center">
+        <div className="relative aspect-4/5 max-h-[80vh] overflow-hidden bg-stone-300 cursor-pointer group">
+          <Image
+            src={item.image}
+            alt={item.title}
+            fill
+            className="object-cover transition-transform h-full duration-700 group-hover:scale-115"
+          />
+
+          <div className="group flex justify-center items-center h-full">
+            <TransitionLink
+              href="/home"
+              className="opacity-0 scale-75 h-[200px] group-hover:opacity-100 p-10 group-hover:scale-100 inline-flex items-center justify-center uppercase tracking-widest transition-all duration-500 ease-out border border-[#CEC7BF] text-h4 text-white backdrop-blur-[7.5px] bg-[rgba(0,0,0,0.35)] rounded-full  hover:bg-[rgba(0,0,0,0.45)] text-center"
+            >
+              View detail
+            </TransitionLink>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
 
 export default function HomeContent() {
+  const containerRef = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end end"],
+  });
+
+  const lineHeight = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
+  const rightTextY = useTransform(scrollYProgress, [0, 1], ["0vh", "80vh"]);
+
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col min-h-screen bg-stone-200">
       <Header />
 
-      <main className="flex-grow pt-28">
-        {/* Numbered Content Grid */}
-        <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 h-[80vh] w-full bg-background">
-          {/* 01 The Brief */}
-          <div className="relative group overflow-hidden border-r border-stone-400/20 last:border-r-0 cursor-pointer">
-             <Image src="/images/project-intro-video.png" alt="The Brief" fill className="object-cover opacity-0 group-hover:opacity-100 transition-all duration-700 scale-105 group-hover:scale-100" />
-             <div className="absolute inset-0 p-8 flex flex-col justify-between text-foreground mix-blend-difference group-hover:text-stone-200 transition-colors duration-500 pointer-events-none z-10">
-                <span className="text-2xl font-serif">01</span>
-                <span className="text-lg font-sans uppercase tracking-widest">The Brief</span>
-             </div>
-             <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+      <main className="grow py-16">
+        {/* Section 1: Introduction, Address + Images */}
+        <section className="relative min-h-[90vh] w-full flex items-center justify-center overflow-hidden py-24">
+          {/* Top Left Image */}
+          <div className="absolute top-0 left-0 w-[35vw] md:w-[25vw] h-[25vh] md:h-[20vh]">
+            <Image
+              src="/images/tropical-beach-aerial.png"
+              alt="Aerial Beach"
+              fill
+              className="object-cover"
+            />
           </div>
 
-          {/* 02 Render */}
-          <div className="relative group overflow-hidden border-r border-stone-400/20 last:border-r-0 cursor-pointer">
-             <Image src="/images/luxury-villa-exterior.png" alt="Render" fill className="object-cover opacity-0 group-hover:opacity-100 transition-all duration-700 scale-105 group-hover:scale-100" />
-             <div className="absolute inset-0 p-8 flex flex-col justify-between text-foreground mix-blend-difference group-hover:text-stone-200 transition-colors duration-500 pointer-events-none z-10">
-                <span className="text-2xl font-serif">02</span>
-                <span className="text-lg font-sans uppercase tracking-widest">Render</span>
-             </div>
-             <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+          {/* Bottom Left Image */}
+          <div className="absolute bottom-[10%] lg:-bottom-3 xl:bottom-0 left-[10%] lg:left-[20%] w-[40vw] md:w-[20vw] h-[25vh] md:h-[30vh]">
+            <Image
+              src="/images/seaside-promenade-running.png"
+              alt="Promenade Running"
+              fill
+              className="object-cover"
+            />
           </div>
 
-          {/* 03 Explore | Finishes */}
-          <div className="relative group overflow-hidden border-r border-stone-400/20 last:border-r-0 cursor-pointer">
-             <Image src="/images/kitchen-counter-decor.png" alt="Explore Finishes" fill className="object-cover opacity-0 group-hover:opacity-100 transition-all duration-700 scale-105 group-hover:scale-100" />
-             <div className="absolute inset-0 p-8 flex flex-col justify-between text-foreground mix-blend-difference group-hover:text-stone-200 transition-colors duration-500 pointer-events-none z-10">
-                <span className="text-2xl font-serif">03</span>
-                <span className="text-lg font-sans uppercase tracking-widest">Explore | Finishes</span>
-             </div>
-             <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+          {/* Right Image */}
+          <div className="absolute top-[15%] -right-32 xl:right-0 w-[35vw] md:w-[23vw] 2xl:w-[25vw] h-[60vh] md:h-[70vh]">
+            <Image
+              src="/images/coastal-neighborhood-aerial.png"
+              alt="Coastal Neighborhood"
+              fill
+              className="object-cover"
+            />
           </div>
 
-          {/* 04 Animation */}
-          <div className="relative group overflow-hidden border-r border-stone-400/20 last:border-r-0 cursor-pointer">
-             <Image src="/images/coastal-neighborhood-aerial.png" alt="Animation" fill className="object-cover opacity-0 group-hover:opacity-100 transition-all duration-700 scale-105 group-hover:scale-100" />
-             <div className="absolute inset-0 p-8 flex flex-col justify-between text-foreground mix-blend-difference group-hover:text-stone-200 transition-colors duration-500 pointer-events-none z-10">
-                <span className="text-2xl font-serif">04</span>
-                <span className="text-lg font-sans uppercase tracking-widest">Animation</span>
-             </div>
-             <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+          {/* Center Text */}
+          <div className="flex flex-col items-center justify-center text-center gap-16 md:gap-20 z-10 max-w-4xl px-4 mt-8">
+            <h4 className="uppercase text-neutral-60 text-h4">
+              House and Land
+            </h4>
+
+            <h1 className="text-h1 font-serif uppercase tracking-wider">
+              97 Ahumoana Drive, Weiti Bay <br />
+              Okura Bush | Auckland | New Zealand
+            </h1>
+
+            <h4 className="uppercase text-neutral-60 text-h4">2026</h4>
+          </div>
+        </section>
+
+        {/* Section 2: Scrolling Progress */}
+        <section
+          ref={containerRef}
+          className="relative w-full bg-stone-200 py-[200px]"
+        >
+          {/* Global Left and Right Sticky Text */}
+          <div className="absolute inset-0 pointer-events-none z-0">
+            <div className="sticky top-20 h-screen w-full flex justify-between px-8 md:px-0">
+              {/* Left side */}
+              <div className="relative h-full flex items-center">
+                <motion.div
+                  className="absolute left-0 lg:left-6 top-1/2 -translate-y-1/2 bg-stone-200 whitespace-nowrap text-brand-5/50 tracking-widest uppercase text-b2"
+                  style={{
+                    writingMode: "vertical-lr",
+                    rotate: 180,
+                  }}
+                >
+                  97 Ahumoana Drive, Weiti Bay | Okura Bush | Auckland | New
+                  Zealand
+                </motion.div>
+              </div>
+
+              {/* Right side */}
+              <div className="relative h-full flex justify-end">
+                <div className="w-px h-[90vh] bg-brand-4 relative right-6 lg:right-8">
+                  <motion.div
+                    className="absolute left-1/2 -translate-x-1/2 top-0 bg-stone-200 p-[10px] whitespace-nowrap  text-brand-5/50 tracking-widest uppercase text-b2"
+                    style={{
+                      writingMode: "vertical-lr",
+                      rotate: 180,
+                      y: rightTextY,
+                    }}
+                  >
+                    House and Land &nbsp;&nbsp;|&nbsp;&nbsp; 2026
+                  </motion.div>
+                </div>
+              </div>
+            </div>
           </div>
 
-          {/* 05 Brochure */}
-          <div className="relative group overflow-hidden border-r border-stone-400/20 last:border-r-0 cursor-pointer">
-             <Image src="/images/aurum-brand-book.png" alt="Brochure" fill className="object-cover opacity-0 group-hover:opacity-100 transition-all duration-700 scale-105 group-hover:scale-100" />
-             <div className="absolute inset-0 p-8 flex flex-col justify-between text-foreground mix-blend-difference group-hover:text-stone-200 transition-colors duration-500 pointer-events-none z-10">
-                <span className="text-2xl font-serif">05</span>
-                <span className="text-lg font-sans uppercase tracking-widest">Brochure</span>
-             </div>
-             <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+          {/* Timeline Content */}
+          <div className="relative z-10 max-w-5xl mx-auto pt-[20vh] pb-[20vh] flex flex-col pointer-events-auto">
+            {/* Center Line spanning entire timeline content */}
+            <div className="absolute left-1/2 top-0 bottom-0 w-[2px] bg-brand-3 -translate-x-1/2 z-0">
+              {/* Top Dot */}
+              <div className="absolute top-0 left-1/2 -translate-x-1/2 w-2 h-2 rounded-full bg-brand-4" />
+
+              <motion.div
+                className="w-full bg-brand-4 origin-top"
+                style={{ height: lineHeight }}
+              />
+
+              {/* Bottom Dot */}
+              <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-2 h-2 rounded-full bg-brand-4" />
+            </div>
+
+            {/* Timeline Items */}
+            {TIMELINE_ITEMS.map((item, i) => (
+              <TimelineItem key={item.id} item={item} index={i} />
+            ))}
           </div>
         </section>
       </main>
 
       {/* Footer */}
-      <footer className="bg-brown-900 text-stone-400 px-12 py-24 flex flex-col lg:flex-row justify-between gap-16 font-sans">
-
-        {/* Left / Enquiries */}
-        <div className="flex flex-col gap-12 max-w-md w-full">
-           <div className="flex flex-col gap-4">
-              <h3 className="text-gold-500 text-sm tracking-widest uppercase mb-2">Enquiries</h3>
-              <div className="grid grid-cols-[30px_1fr] gap-x-4 gap-y-3 text-sm">
-                 <div className="text-stone-600 col-span-2 text-xs uppercase tracking-widest mb-1">Sale</div>
-                 <div className="col-span-2">
-                    <p className="text-stone-200">Sotheby's International</p>
-                    <p>Kelly Brown</p>
-                 </div>
-
-                 <div className="text-stone-600">M/</div>
-                 <div>+64 9 21 471 661</div>
-
-                 <div className="text-stone-600">E/</div>
-                 <div>kelly.brown@northnzsir.com</div>
-              </div>
-           </div>
-
-           <div className="flex flex-col gap-4">
-              <div className="grid grid-cols-[30px_1fr] gap-x-4 gap-y-3 text-sm">
-                 <div className="text-stone-600 col-span-2 text-xs uppercase tracking-widest mb-1">Developer</div>
-                 <div className="col-span-2">
-                    <p className="text-stone-200">Blue Sky Ltd</p>
-                 </div>
-
-                 <div className="text-stone-600">M/</div>
-                 <div>+64 9 21 471 661</div>
-
-                 <div className="text-stone-600">E/</div>
-                 <div>kelly.brown@northnzsir.com</div>
-              </div>
-           </div>
-        </div>
-
-        {/* Center / Logo */}
-        <div className="flex flex-col items-center justify-center gap-6 w-full lg:w-auto mt-12 lg:mt-0 order-last lg:order-none">
-           <div className="font-serif text-5xl tracking-widest text-gold-500">AURUM</div>
-           <div className="text-center text-xs tracking-widest uppercase flex flex-col gap-1">
-              <p className="text-stone-200">Visual Communications</p>
-              <p className="opacity-60">junnagency.com</p>
-           </div>
-        </div>
-
-        {/* Right / Project Details */}
-        <div className="flex flex-col gap-12 max-w-md w-full">
-           <h3 className="text-gold-500 text-sm tracking-widest uppercase mb-2">Project Details</h3>
-
-           <div className="flex flex-col gap-10 text-sm">
-              <div className="grid grid-cols-[30px_1fr] gap-x-4 gap-y-3">
-                 <div className="text-stone-600 col-span-2 text-xs uppercase tracking-widest mb-1">Developer</div>
-                 <div className="col-span-2">
-                    <p className="text-stone-200">Blue Sky Ltd</p>
-                 </div>
-                 <div className="text-stone-600">M/</div>
-                 <div>+64 9 21 471 661</div>
-                 <div className="text-stone-600">E/</div>
-                 <div>kelly.brown@northnzsir.com</div>
-              </div>
-
-              <div className="grid grid-cols-[30px_1fr] gap-x-4 gap-y-3">
-                 <div className="text-stone-600 col-span-2 text-xs uppercase tracking-widest mb-1">Interior Design</div>
-                 <div className="col-span-2">
-                    <p className="text-stone-200">OneIdea</p>
-                 </div>
-                 <div className="text-stone-600">M/</div>
-                 <div>+64 9 21 471 661</div>
-                 <div className="text-stone-600">E/</div>
-                 <div>kelly.brown@northnzsir.com</div>
-              </div>
-
-              <div className="grid grid-cols-[30px_1fr] gap-x-4 gap-y-3">
-                 <div className="text-stone-600 col-span-2 text-xs uppercase tracking-widest mb-1">Architect</div>
-                 <div className="col-span-2">
-                    <p className="text-stone-200">Alchemy</p>
-                 </div>
-                 <div className="text-stone-600">P/</div>
-                 <div>+64 9 216 8118</div>
-                 <div className="text-stone-600">E/</div>
-                 <div>studio@alchemy.co.nz</div>
-              </div>
-           </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }
