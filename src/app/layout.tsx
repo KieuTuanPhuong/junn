@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Cinzel, Faculty_Glyphic, Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import "@fontsource/mona-sans";
+import "@fontsource-variable/mona-sans";
 import { TransitionProvider } from "./components/TransitionProvider";
 
 const cinzel = Cinzel({
