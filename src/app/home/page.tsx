@@ -123,55 +123,177 @@ export default function HomeContent() {
   const lineHeight = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
   const rightTextY = useTransform(scrollYProgress, [0, 1], ["0vh", "80vh"]);
 
+  const { scrollY } = useScroll();
+  const heroTextScale = useTransform(scrollY, [0, 400], [1, 0.3]);
+  const heroTextOpacity = useTransform(scrollY, [0, 400], [1, 0]);
+  const heroTextY = useTransform(scrollY, [0, 400], ["0vh", "-45vh"]);
+
+  const section1Ref = useRef<HTMLElement>(null);
+  const { scrollYProgress: s1Progress } = useScroll({
+    target: section1Ref,
+    offset: ["start start", "end end"],
+  });
+
+  const imagesY = useTransform(s1Progress, [0, 1], ["100vh", "-100vh"]);
+
   return (
     <div className="flex flex-col min-h-screen bg-stone-200">
+      {/* Hero Section */}
+      <section className="relative h-screen w-full flex flex-col justify-between p-12 pb-12 text-stone-200">
+        <header className="flex justify-between items-center top-0 w-full z-50 text-stone-100 font-mona">
+          <div className="flex gap-14 uppercase tracking-widest text-sm">
+            <TransitionLink
+              href="#"
+              className="hover:opacity-70 transition-opacity"
+            >
+              The brief
+            </TransitionLink>
+            <TransitionLink
+              href="#"
+              className="hover:opacity-70 transition-opacity"
+            >
+              Renders
+            </TransitionLink>
+            <TransitionLink
+              href="#"
+              className="hover:opacity-70 transition-opacity"
+            >
+              Brochure
+            </TransitionLink>
+          </div>
+          <div className="flex gap-14 uppercase tracking-widest text-sm">
+            <TransitionLink
+              href="#"
+              className="hover:opacity-70 transition-opacity"
+            >
+              Ezplore | Finished
+            </TransitionLink>
+            <TransitionLink
+              href="#"
+              className="hover:opacity-70 transition-opacity"
+            >
+              Animation
+            </TransitionLink>
+          </div>
+        </header>
+
+        <div className="absolute inset-0 z-0">
+          <Image
+            src="/images/luxury-villa-hero.png"
+            alt="Luxury Villa"
+            fill
+            className="object-cover"
+            priority
+          />
+        </div>
+
+        <motion.div
+          className="relative z-10 flex justify-center gap-8 items-center font-sans text-sm tracking-wide"
+          style={{
+            scale: heroTextScale,
+            opacity: heroTextOpacity,
+            y: heroTextY,
+          }}
+        >
+          <div className="flex flex-col gap-1 text-end font-mona">
+            <p className="text-b1">97 Ahumoana Drive, Weiti Bay</p>
+            <p className="text-b1">Okura Bush | Auckland | New Zealand</p>
+          </div>
+
+          <div className="uppercase text-h0 text-white text-center">AURUM</div>
+
+          <div className="flex flex-col items-end gap-6 font-mona">
+            <p className="text-b1">
+              House and Land &nbsp;&nbsp;|&nbsp;&nbsp; 2026
+            </p>
+          </div>
+        </motion.div>
+      </section>
+
       <Header />
 
       <main className="grow py-16">
         {/* Section 1: Introduction, Address + Images */}
-        <section className="relative min-h-[90vh] w-full flex items-center justify-center overflow-hidden py-24">
-          {/* Top Left Image */}
-          <div className="absolute top-0 left-0 w-[35vw] md:w-[25vw] h-[25vh] md:h-[20vh]">
-            <Image
-              src="/images/tropical-beach-aerial.png"
-              alt="Aerial Beach"
-              fill
-              className="object-cover"
-            />
-          </div>
+        <section ref={section1Ref} className="relative h-[350vh] w-full">
+          <div className="sticky top-0 h-screen w-full flex items-center justify-center overflow-hidden">
+            {/* Top Left Image */}
+            <motion.div
+              style={{ y: imagesY }}
+              className="absolute top-0 left-0 w-[35vw] md:w-[25vw] h-[35vh] md:h-[30vh]"
+            >
+              <Image
+                src="/images/tropical-beach-aerial.png"
+                alt="Aerial Beach"
+                fill
+                className="object-cover"
+              />
+            </motion.div>
 
-          {/* Bottom Left Image */}
-          <div className="absolute bottom-[10%] lg:-bottom-3 xl:bottom-0 left-[10%] lg:left-[20%] w-[40vw] md:w-[20vw] h-[25vh] md:h-[30vh]">
-            <Image
-              src="/images/seaside-promenade-running.png"
-              alt="Promenade Running"
-              fill
-              className="object-cover"
-            />
-          </div>
+            {/* Middle Left Image */}
+            <motion.div
+              style={{ y: imagesY }}
+              className="absolute bottom-[3%] left-[10%] lg:left-[20%] w-[40vw] md:w-[20vw] h-[25vh] md:h-[25vh]"
+            >
+              <Image
+                src="/images/seaside-promenade-running.png"
+                alt="Promenade Running"
+                fill
+                className="object-cover"
+              />
+            </motion.div>
 
-          {/* Right Image */}
-          <div className="absolute top-[15%] -right-32 xl:right-0 w-[35vw] md:w-[23vw] 2xl:w-[25vw] h-[60vh] md:h-[70vh]">
-            <Image
-              src="/images/coastal-neighborhood-aerial.png"
-              alt="Coastal Neighborhood"
-              fill
-              className="object-cover"
-            />
-          </div>
+            {/* Bottom Left Image */}
+            <motion.div
+              style={{ y: imagesY }}
+              className="absolute bottom-[-80%] left-[5%] lg:left-[3%] w-[40vw] md:w-[20vw] h-[45vh] md:h-[55vh]"
+            >
+              <Image
+                src="/images/pool_lounge.png"
+                alt="Pool Lounge"
+                fill
+                className="object-cover"
+              />
+            </motion.div>
 
-          {/* Center Text */}
-          <div className="flex flex-col items-center justify-center text-center gap-16 md:gap-20 z-10 max-w-4xl px-4 mt-8">
-            <h4 className="uppercase text-neutral-60 text-h4">
-              House and Land
-            </h4>
+            {/* Top Right Image */}
+            <motion.div
+              style={{ y: imagesY }}
+              className="absolute top-[15%] lg:top-[20%] right-0 w-[25vw] md:w-[25vw] h-[55vh] md:h-[60vh]"
+            >
+              <Image
+                src="/images/coastal-neighborhood-aerial.png"
+                alt="Coastal Neighborhood"
+                fill
+                className="object-cover"
+              />
+            </motion.div>
 
-            <h1 className="text-h1 font-serif uppercase tracking-wider">
-              97 Ahumoana Drive, Weiti Bay <br />
-              Okura Bush | Auckland | New Zealand
-            </h1>
+            {/* Bottom Right Image */}
+            <motion.div
+              style={{ y: imagesY }}
+              className="absolute bottom-[-100%] right-[5%] lg:right-[10%] w-[20vw] md:w-[25vw] h-[55vh] md:h-[60vh]"
+            >
+              <Image
+                src="/images/champagne_glasses.png"
+                alt="Champagne Glasses"
+                fill
+                className="object-cover"
+              />
+            </motion.div>
 
-            <h4 className="uppercase text-neutral-60 text-h4">2026</h4>
+            {/* Center Text */}
+            <div className="flex flex-col items-center justify-center text-center gap-16 md:gap-20 z-10 max-w-4xl px-4 mt-8">
+              <h4 className="uppercase text-neutral-60 text-h4">
+                House and Land
+              </h4>
+
+              <h1 className="text-h1 font-serif uppercase tracking-wider">
+                97 Ahumoana Drive, Weiti Bay <br />
+                Okura Bush | Auckland | New Zealand
+              </h1>
+
+              <h4 className="uppercase text-neutral-60 text-h4">2026</h4>
+            </div>
           </div>
         </section>
 

@@ -47,10 +47,10 @@
   --color-button-background: color-mix(in srgb, var(--color-neutral-100) 35%, transparent);
 
   /* Fonts */
-  --font-sans: var(--font-sans);
+  --font-sans: var(--font-geist-sans), sans-serif;
   --font-serif: var(--font-cinzel), serif;
   --font-display: var(--font-faculty-glyphic), sans-serif;
-  --font-mona: "Mona Sans", sans-serif;
+  --font-mona: "Mona Sans Variable", "Mona Sans", sans-serif;
 
   /* Typography Utilities extracted from Figma */
   --text-2xs: 12px;
