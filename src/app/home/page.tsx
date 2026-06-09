@@ -64,7 +64,7 @@ const TimelineItem = ({ item, index }: TimelineItemProps) => {
   return (
     <div
       ref={itemRef}
-      className={`relative flex items-stretch w-full gap-8 z-10 py-6 overflow-visible ${
+      className={`relative flex items-stretch w-full gap-8 z-10 py-10 overflow-visible ${
         isEven ? "flex-row" : "flex-row-reverse"
       }`}
     >
@@ -91,15 +91,14 @@ const TimelineItem = ({ item, index }: TimelineItemProps) => {
       </div>
 
       <div className="w-2/3 flex flex-col justify-center">
-        <div className="relative aspect-4/5 max-h-[80vh] overflow-hidden bg-stone-300 cursor-pointer group">
+        <div className="relative overflow-hidden bg-stone-300 cursor-pointer group">
           <Image
             src={item.image}
             alt={item.title}
-            fill
-            className="object-cover transition-transform h-full duration-700 group-hover:scale-115"
+            className="w-full h-auto transition-transform duration-700 group-hover:scale-115"
           />
 
-          <div className="group flex justify-center items-center h-full">
+          <div className="absolute inset-0 flex justify-center items-center">
             <TransitionLink
               href="/home"
               className="opacity-0 scale-75 h-[200px] group-hover:opacity-100 p-10 group-hover:scale-100 inline-flex items-center justify-center uppercase tracking-widest transition-all duration-500 ease-out border border-[#CEC7BF] text-h4 text-white backdrop-blur-[7.5px] bg-[rgba(0,0,0,0.35)] rounded-full  hover:bg-[rgba(0,0,0,0.45)] text-center"
@@ -140,7 +139,12 @@ export default function HomeContent() {
     <div className="flex flex-col min-h-screen bg-stone-200">
       {/* Hero Section */}
       <section className="relative h-screen w-full flex flex-col justify-between p-12 pb-12 text-stone-200">
-        <header className="flex justify-between items-center top-0 w-full z-50 text-stone-100 font-mona">
+        <motion.header
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
+          className="flex justify-between items-center top-0 w-full z-50 text-stone-100 font-mona"
+        >
           <div className="flex gap-14 uppercase tracking-widest text-sm">
             <TransitionLink
               href="#"
@@ -175,9 +179,14 @@ export default function HomeContent() {
               Animation
             </TransitionLink>
           </div>
-        </header>
+        </motion.header>
 
-        <div className="absolute inset-0 z-0">
+        <motion.div
+          initial={{ opacity: 0, scale: 1.05 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1.6, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+          className="absolute inset-0 z-0"
+        >
           <Image
             src="/images/luxury-villa-hero.png"
             alt="Luxury Villa"
@@ -185,28 +194,35 @@ export default function HomeContent() {
             className="object-cover"
             priority
           />
-        </div>
+        </motion.div>
 
         <motion.div
-          className="relative z-10 flex justify-center gap-8 items-center font-sans text-sm tracking-wide"
-          style={{
-            scale: heroTextScale,
-            opacity: heroTextOpacity,
-            y: heroTextY,
-          }}
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1.2, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
+          className="relative z-10"
         >
-          <div className="flex flex-col gap-1 text-end font-mona">
-            <p className="text-b1">97 Ahumoana Drive, Weiti Bay</p>
-            <p className="text-b1">Okura Bush | Auckland | New Zealand</p>
-          </div>
+          <motion.div
+            className="flex justify-center gap-8 items-center font-sans text-sm tracking-wide"
+            style={{
+              scale: heroTextScale,
+              opacity: heroTextOpacity,
+              y: heroTextY,
+            }}
+          >
+            <div className="flex flex-col gap-1 text-end font-mona">
+              <p className="text-b1">97 Ahumoana Drive, Weiti Bay</p>
+              <p className="text-b1">Okura Bush | Auckland | New Zealand</p>
+            </div>
 
-          <div className="uppercase text-h0 text-white text-center">AURUM</div>
+            <div className="uppercase text-h0 text-white text-center">AURUM</div>
 
-          <div className="flex flex-col items-end gap-6 font-mona">
-            <p className="text-b1">
-              House and Land &nbsp;&nbsp;|&nbsp;&nbsp; 2026
-            </p>
-          </div>
+            <div className="flex flex-col items-end gap-6 font-mona">
+              <p className="text-b1">
+                House and Land &nbsp;&nbsp;|&nbsp;&nbsp; 2026
+              </p>
+            </div>
+          </motion.div>
         </motion.div>
       </section>
 

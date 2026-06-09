@@ -1,3 +1,6 @@
+"use client";
+
+import { motion } from "framer-motion";
 import { TransitionLink } from "./components/TransitionLink";
 
 export default function Home() {
@@ -13,12 +16,23 @@ export default function Home() {
         <source src="/videos/home_demo.mp4" type="video/mp4" />
       </video>
 
-      <TransitionLink
-        href="/home"
-        className="inline-flex items-center justify-center uppercase tracking-widest transition-all duration-500 ease-out border border-[#CEC7BF] text-h4 text-white backdrop-blur-[7.5px] bg-[rgba(0,0,0,0.35)] rounded-full aspect-square hover:bg-[rgba(0,0,0,0.45)] h-[140px] mb-16"
+      <motion.div
+        initial={{ opacity: 0, y: 24, scale: 0.96 }}
+        animate={{ opacity: 1, y: 0, scale: 1 }}
+        transition={{
+          duration: 1.2,
+          delay: 0.6,
+          ease: [0.16, 1, 0.3, 1], // premium custom easeOutExpo/easeOutQuart
+        }}
+        className="z-10"
       >
-        Enter
-      </TransitionLink>
+        <TransitionLink
+          href="/home"
+          className="inline-flex items-center justify-center uppercase tracking-widest transition-all duration-500 ease-out border border-[#CEC7BF] text-h4 text-white backdrop-blur-[7.5px] bg-[rgba(0,0,0,0.35)] rounded-full aspect-square hover:bg-[rgba(0,0,0,0.45)] h-[140px] mb-16"
+        >
+          Enter
+        </TransitionLink>
+      </motion.div>
     </main>
   );
 }
