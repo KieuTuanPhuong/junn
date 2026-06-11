@@ -143,7 +143,7 @@ export default function HomeContent() {
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
-          className="flex justify-between items-center top-0 w-full z-50 text-stone-100 font-mona"
+          className="flex justify-between items-center top-0 w-full z-50 text-stone-100 font-mona container mx-auto"
         >
           <div className="flex gap-14 uppercase tracking-widest text-sm">
             <TransitionLink
@@ -203,21 +203,23 @@ export default function HomeContent() {
           className="relative z-10"
         >
           <motion.div
-            className="flex justify-center gap-8 items-center font-sans text-sm tracking-wide"
+            className="flex justify-center gap-8 items-center font-sans text-sm tracking-wide container mx-auto"
             style={{
               scale: heroTextScale,
               opacity: heroTextOpacity,
               y: heroTextY,
             }}
           >
-            <div className="flex flex-col gap-1 text-end font-mona">
+            <div className="flex-1 flex flex-col gap-1 text-end font-mona">
               <p className="text-b1">97 Ahumoana Drive, Weiti Bay</p>
               <p className="text-b1">Okura Bush | Auckland | New Zealand</p>
             </div>
 
-            <div className="uppercase text-h0 text-white text-center">AURUM</div>
+            <div className="uppercase text-h0 text-white text-center">
+              AURUM
+            </div>
 
-            <div className="flex flex-col items-end gap-6 font-mona">
+            <div className="flex-1 flex flex-col items-start gap-6 font-mona">
               <p className="text-b1">
                 House and Land &nbsp;&nbsp;|&nbsp;&nbsp; 2026
               </p>
@@ -354,7 +356,7 @@ export default function HomeContent() {
           </div>
 
           {/* Timeline Content */}
-          <div className="relative z-10 max-w-5xl mx-auto pt-[20vh] pb-[20vh] flex flex-col pointer-events-auto">
+          <div className="relative z-10 container mx-auto pt-[20vh] pb-[20vh] flex flex-col pointer-events-auto">
             {/* Center Line spanning entire timeline content */}
             <div className="absolute left-1/2 top-0 bottom-0 w-[2px] bg-brand-3 -translate-x-1/2 z-0">
               {/* Top Dot */}
