@@ -2,7 +2,7 @@ export default function Footer() {
   return (
     <footer className="bg-brand-4 relative flex flex-col items-center overflow-hidden font-mona mt-10">
       {/* Top Section */}
-      <div className="w-full flex flex-col lg:flex-row gap-[120px] lg:gap-[120px] px-[78px] py-[100px] border-b border-brand-3">
+      <div className="container w-full mx-auto flex flex-col lg:flex-row gap-[120px] lg:gap-[120px] px-[78px] md:px-0 py-[100px]">
         {/* Enquiries */}
         <div className="flex-1 flex flex-col gap-10">
           <h2 className="font-serif text-3xl md:text-[32px] font-semibold uppercase text-brand-6">
@@ -110,8 +110,10 @@ export default function Footer() {
         </div>
       </div>
 
+      <div className="w-full border-b border-brand-3"></div>
+
       {/* Bottom Section */}
-      <div className="w-full flex flex-col items-center gap-6 px-16 py-[100px]">
+      <div className="w-full flex flex-col items-center gap-6 px-16 md:px-0 py-[100px] container mx-auto">
         {/* Addresses */}
         <div className="w-full flex flex-col items-center gap-1 text-white text-h3! text-center font-mona!">
           <div>97 Ahumoana Drive &nbsp;|&nbsp; Weiti Bay</div>
