@@ -1,7 +1,7 @@
-"use client";
+"use client"
 
-import Footer from "./components/Footer";
-import { TransitionLink } from "./components/TransitionLink";
+import Footer from "./components/Footer"
+import { TransitionLink } from "./components/TransitionLink"
 
 export default function NotFound() {
   return (
@@ -20,7 +20,7 @@ export default function NotFound() {
           <h2 className="text-h4 uppercase text-stone-500 mb-16 tracking-[0.2em]">
             Page Not Found
           </h2>
-          
+
           <TransitionLink
             href="/"
             className="inline-flex items-center justify-center uppercase tracking-widest transition-all duration-500 ease-out border border-stone-400 text-b1 text-black bg-transparent hover:bg-stone-300 rounded-full aspect-square h-[140px]"
@@ -32,5 +32,5 @@ export default function NotFound() {
 
       <Footer />
     </div>
-  );
+  )
 }

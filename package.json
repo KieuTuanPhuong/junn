@@ -1,5 +1,5 @@
 {
-  "name": "alchemy-landingpage",
+  "name": "junn-website",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -7,11 +7,13 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
+    "format": "prettier --write .",
     "prepare": "husky"
   },
   "dependencies": {
     "@fontsource-variable/mona-sans": "^5.2.8",
     "@fontsource/mona-sans": "^5.2.8",
+    "@mux/mux-video": "^0.31.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "framer-motion": "^12.40.0",
@@ -32,12 +34,21 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.2.7",
+    "eslint-config-prettier": "^10.1.8",
     "husky": "^9.1.7",
     "lint-staged": "^16",
+    "prettier": "^3.8.4",
     "tailwindcss": "^4",
     "typescript": "^5"
   },
   "lint-staged": {
-    "*.{js,jsx,ts,tsx}": "eslint --fix --no-warn-ignored"
+    "*.{js,jsx,ts,tsx}": [
+      "eslint --fix --no-warn-ignored",
+      "prettier --write"
+    ],
+    "*.{css,json,md}": "prettier --write"
+  },
+  "prettier": {
+    "semi": false
   }
 }

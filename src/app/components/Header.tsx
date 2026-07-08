@@ -1,13 +1,13 @@
-"use client";
+"use client"
 
-import { motion, useScroll, useTransform } from "framer-motion";
-import { TransitionLink } from "./TransitionLink";
+import { motion, useScroll, useTransform } from "framer-motion"
+import { TransitionLink } from "./TransitionLink"
 
 export default function Header() {
-  const { scrollY } = useScroll();
-  const opacity = useTransform(scrollY, [200, 400], [0, 1]);
-  const pointerEvents = useTransform(scrollY, [200, 201], ["none", "auto"]);
-  const textY = useTransform(scrollY, [200, 400], ["100%", "0%"]);
+  const { scrollY } = useScroll()
+  const opacity = useTransform(scrollY, [200, 400], [0, 1])
+  const pointerEvents = useTransform(scrollY, [200, 201], ["none", "auto"])
+  const textY = useTransform(scrollY, [200, 400], ["100%", "0%"])
 
   return (
     <motion.header
@@ -59,5 +59,5 @@ export default function Header() {
         </div>
       </div>
     </motion.header>
-  );
+  )
 }

@@ -1,6 +1,101 @@
 @import "tailwindcss";
 @import "tw-animate-css";
-@import "shadcn/tailwind.css";
+
+@theme inline {
+  @keyframes accordion-down {
+    from {
+      height: 0;
+    }
+    to {
+      height: var(
+        --radix-accordion-content-height,
+        var(--accordion-panel-height, auto)
+      );
+    }
+  }
+
+  @keyframes accordion-up {
+    from {
+      height: var(
+        --radix-accordion-content-height,
+        var(--accordion-panel-height, auto)
+      );
+    }
+    to {
+      height: 0;
+    }
+  }
+}
+
+/* Custom variants */
+@custom-variant data-open {
+  &:where([data-state="open"]),
+  &:where([data-open]:not([data-open="false"])) {
+    @slot;
+  }
+}
+
+@custom-variant data-closed {
+  &:where([data-state="closed"]),
+  &:where([data-closed]:not([data-closed="false"])) {
+    @slot;
+  }
+}
+
+@custom-variant data-checked {
+  &:where([data-state="checked"]),
+  &:where([data-checked]:not([data-checked="false"])) {
+    @slot;
+  }
+}
+
+@custom-variant data-unchecked {
+  &:where([data-state="unchecked"]),
+  &:where([data-unchecked]:not([data-unchecked="false"])) {
+    @slot;
+  }
+}
+
+@custom-variant data-selected {
+  &:where([data-selected="true"]) {
+    @slot;
+  }
+}
+
+@custom-variant data-disabled {
+  &:where([data-disabled="true"]),
+  &:where([data-disabled]:not([data-disabled="false"])) {
+    @slot;
+  }
+}
+
+@custom-variant data-active {
+  &:where([data-state="active"]),
+  &:where([data-active]:not([data-active="false"])) {
+    @slot;
+  }
+}
+
+@custom-variant data-horizontal {
+  &:where([data-orientation="horizontal"]) {
+    @slot;
+  }
+}
+
+@custom-variant data-vertical {
+  &:where([data-orientation="vertical"]) {
+    @slot;
+  }
+}
+
+@utility no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
 
 @custom-variant dark (&:is(.dark *));
 
@@ -9,27 +104,27 @@
   --color-foreground: var(--foreground);
 
   /* Figma Extracted Colors: Global */
-  --color-neutral-100: #1B1B1B;
+  --color-neutral-100: #1b1b1b;
   --color-neutral-90: #404040;
   --color-neutral-80: #616161;
   --color-neutral-70: #757575;
-  --color-neutral-60: #8C8C8C;
-  --color-neutral-50: #E4E4E4;
-  --color-neutral-40: #E8E8E8;
-  --color-neutral-30: #F2F2F2;
-  --color-neutral-20: #F9F9F9;
-  --color-neutral-10: #FDFDFD;
-  --color-neutral-0: #FFFFFF;
-  --color-brand-1: #FFF6E5;
-  --color-brand-2: #EEEBE6;
-  --color-brand-3: #E5E0DA;
-  --color-brand-4: #CEC7BF;
-  --color-brand-5: #8A7D69;
-  --color-brand-6: #39240D;
-  --color-error: #D20000;
-  --color-success: #108F40;
-  --color-warning: #F59E0B;
-  --color-info: #3B82F6;
+  --color-neutral-60: #8c8c8c;
+  --color-neutral-50: #e4e4e4;
+  --color-neutral-40: #e8e8e8;
+  --color-neutral-30: #f2f2f2;
+  --color-neutral-20: #f9f9f9;
+  --color-neutral-10: #fdfdfd;
+  --color-neutral-0: #ffffff;
+  --color-brand-1: #fff6e5;
+  --color-brand-2: #eeebe6;
+  --color-brand-3: #e5e0da;
+  --color-brand-4: #cec7bf;
+  --color-brand-5: #8a7d69;
+  --color-brand-6: #39240d;
+  --color-error: #d20000;
+  --color-success: #108f40;
+  --color-warning: #f59e0b;
+  --color-info: #3b82f6;
 
   /* Figma Extracted Colors: Semantic */
   --color-foreground-primary: var(--color-neutral-100);
@@ -44,13 +139,19 @@
   --color-background-disable: var(--color-neutral-80);
   --color-line-primary: var(--color-brand-2);
   --color-line-secondary: var(--color-brand-3);
-  --color-button-background: color-mix(in srgb, var(--color-neutral-100) 35%, transparent);
+  --color-button-background: color-mix(
+    in srgb,
+    var(--color-neutral-100) 35%,
+    transparent
+  );
 
   /* Fonts */
   --font-sans: var(--font-geist-sans), sans-serif;
   --font-serif: var(--font-cinzel), serif;
   --font-display: var(--font-faculty-glyphic), sans-serif;
   --font-mona: "Mona Sans Variable", "Mona Sans", sans-serif;
+  --font-gabarito: var(--font-gabarito), sans-serif;
+  --font-urbanist: var(--font-urbanist), sans-serif;
 
   /* Typography Utilities extracted from Figma */
   --text-2xs: 12px;
@@ -101,22 +202,120 @@
 }
 
 @layer utilities {
-  .text-h0 { font-family: var(--font-serif); font-size: 200px; font-weight: 400; line-height: 1.2; text-transform: uppercase; }
-  .text-h1 { font-family: var(--font-serif); font-size: 28px; font-weight: 400; line-height: 1.2; @variant md { font-size: 32px; } }
-  .text-h2 { font-family: var(--font-serif); font-size: 20px; font-weight: 400; line-height: 1.2; @variant md { font-size: 24px; } }
-  .text-h3 { font-family: var(--font-serif); font-size: 16px; font-weight: 400; line-height: 1.5; @variant md { font-size: 18px; } }
-  .text-h4 { font-family: var(--font-serif); font-size: 14px; font-weight: 400; line-height: 1.5; @variant md { font-size: 16px; } }
-  .text-sh1 { font-family: var(--font-mona); font-size: 20px; font-weight: 300; line-height: 1.2; @variant md { font-size: 24px; } }
-  .text-sh2 { font-family: var(--font-mona); font-size: 14px; font-weight: 400; line-height: 1.5; @variant md { font-size: 16px; } }
-  .text-sh3 { font-family: var(--font-mona); font-size: 10px; font-weight: 400; line-height: 1.5; text-transform: uppercase; @variant md { font-size: 12px; } }
-  .text-b1 { font-family: var(--font-mona); font-size: 12px; font-weight: 300; line-height: 1.5; @variant md { font-size: 14px; } }
-  .text-b2 { font-family: var(--font-mona); font-size: 10px; font-weight: 300; line-height: 1.5; @variant md { font-size: 12px; } }
-  .text-faculty-base { font-family: var(--font-display); font-size: 16px; font-weight: 400; line-height: 1.3; }
-  .text-faculty-lg { font-family: var(--font-display); font-size: 32px; font-weight: 400; line-height: 1.3; }
-  .text-aurum-hero { font-family: var(--font-serif); font-size: 347px; font-weight: 400; line-height: 0.9; text-transform: uppercase; }
+  .text-h0 {
+    font-family: var(--font-serif);
+    font-size: 200px;
+    font-weight: 400;
+    line-height: 1.2;
+    text-transform: uppercase;
+  }
+  /* Typography scale: Gabarito (headings) + Urbanist (body/sub) */
+  .text-h1 {
+    font-family: var(--font-gabarito);
+    font-size: 40px;
+    font-weight: 500;
+    line-height: 1.3;
+    letter-spacing: 0;
+  }
+  .text-h2 {
+    font-family: var(--font-gabarito);
+    font-size: 32px;
+    font-weight: 400;
+    line-height: 1.3;
+    letter-spacing: 0;
+  }
+  .text-h3 {
+    font-family: var(--font-gabarito);
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 1.3;
+    letter-spacing: 0;
+  }
+  .text-b1 {
+    font-family: var(--font-urbanist);
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 1.3;
+    letter-spacing: 0;
+  }
+  .text-b2 {
+    font-family: var(--font-urbanist);
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 1.2;
+    letter-spacing: 0.05em;
+  }
+  .text-b3-regular {
+    font-family: var(--font-urbanist);
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.3;
+    letter-spacing: 0;
+  }
+  .text-b3-bold {
+    font-family: var(--font-urbanist);
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: 0.1em;
+  }
+  .text-sh1 {
+    font-family: var(--font-urbanist);
+    font-size: 16px;
+    font-weight: 200;
+    line-height: 1.2;
+    letter-spacing: 0.35em;
+  }
+  .text-sh2 {
+    font-family: var(--font-urbanist);
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1;
+    letter-spacing: 0;
+  }
+  .text-bt {
+    font-family: var(--font-urbanist);
+    font-size: 48px;
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: 0.1em;
+  }
 }
 
-:root { /* Based on the stone/cream palette */ --background: oklch(1 0 0); --foreground: oklch(0.145 0 0); --card: oklch(1 0 0); --card-foreground: oklch(0.145 0 0); --popover: oklch(1 0 0); --popover-foreground: oklch(0.145 0 0); --primary: oklch(0.205 0 0); --primary-foreground: oklch(0.985 0 0); --secondary: oklch(0.97 0 0); --secondary-foreground: oklch(0.205 0 0); --muted: oklch(0.97 0 0); --muted-foreground: oklch(0.556 0 0); --accent: oklch(0.97 0 0); --accent-foreground: oklch(0.205 0 0); --destructive: oklch(0.577 0.245 27.325); --border: oklch(0.922 0 0); --input: oklch(0.922 0 0); --ring: oklch(0.708 0 0); --chart-1: oklch(0.87 0 0); --chart-2: oklch(0.556 0 0); --chart-3: oklch(0.439 0 0); --chart-4: oklch(0.371 0 0); --chart-5: oklch(0.269 0 0); --radius: 0.625rem; --sidebar: oklch(0.985 0 0); --sidebar-foreground: oklch(0.145 0 0); --sidebar-primary: oklch(0.205 0 0); --sidebar-primary-foreground: oklch(0.985 0 0); --sidebar-accent: oklch(0.97 0 0); --sidebar-accent-foreground: oklch(0.205 0 0); --sidebar-border: oklch(0.922 0 0); --sidebar-ring: oklch(0.708 0 0);
+:root {
+  /* Based on the stone/cream palette */
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.145 0 0);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.145 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.145 0 0);
+  --primary: oklch(0.205 0 0);
+  --primary-foreground: oklch(0.985 0 0);
+  --secondary: oklch(0.97 0 0);
+  --secondary-foreground: oklch(0.205 0 0);
+  --muted: oklch(0.97 0 0);
+  --muted-foreground: oklch(0.556 0 0);
+  --accent: oklch(0.97 0 0);
+  --accent-foreground: oklch(0.205 0 0);
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: oklch(0.922 0 0);
+  --input: oklch(0.922 0 0);
+  --ring: oklch(0.708 0 0);
+  --chart-1: oklch(0.87 0 0);
+  --chart-2: oklch(0.556 0 0);
+  --chart-3: oklch(0.439 0 0);
+  --chart-4: oklch(0.371 0 0);
+  --chart-5: oklch(0.269 0 0);
+  --radius: 0.625rem;
+  --sidebar: oklch(0.985 0 0);
+  --sidebar-foreground: oklch(0.145 0 0);
+  --sidebar-primary: oklch(0.205 0 0);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.97 0 0);
+  --sidebar-accent-foreground: oklch(0.205 0 0);
+  --sidebar-border: oklch(0.922 0 0);
+  --sidebar-ring: oklch(0.708 0 0);
 }
 
 .dark {
@@ -158,7 +357,7 @@
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-brand-2 text-foreground;
+    @apply bg-white text-foreground;
   }
   html {
     @apply font-sans;
