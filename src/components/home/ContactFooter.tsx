@@ -94,14 +94,14 @@ export function ContactFooter() {
             </Link>
           </div>
         </div>
-        <div className="w-full flex items-start">
+        <div className="w-full flex items-start md:hidden">
           <Image
             src={junnLogo}
             alt="Jünn"
             objectFit={"cover"}
             className="w-[240px] md:w-[361px] h-full"
           />
-          <div className="md:hidden flex-1 self-stretch flex items-center w-full text-[#8C8C8C] text-2xs font-urbanist px-6 pt-8 md:px-0 md:pt-0 order-last md:order-none md:text-justify md:[text-align-last:justify]">
+          <div className="flex-1 self-stretch flex items-center w-full text-[#8C8C8C] text-2xs font-urbanist px-6 pt-8 md:px-0 md:pt-0 order-last md:order-none md:text-justify md:[text-align-last:justify]">
             © JUNN 2026
           </div>
         </div>
