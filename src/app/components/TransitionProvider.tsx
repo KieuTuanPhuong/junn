@@ -25,6 +25,7 @@ export const TransitionProvider = ({
   const [isTransitioning, setIsTransitioning] = useState(true)
   const [destination, setDestination] = useState<string | null>(null)
   const [isInitialLoad, setIsInitialLoad] = useState(true)
+  const [prevPathname, setPrevPathname] = useState(pathname)
 
   const navigateWithTransition = (url: string) => {
     if (url === pathname) return
@@ -32,16 +33,23 @@ export const TransitionProvider = ({
     setIsTransitioning(true)
   }
 
+  // Reveal once pathname actually changes after router.push (render-phase
+  // state adjustment, not an effect, so it can't race the entrance animation)
+  if (pathname !== prevPathname) {
+    setPrevPathname(pathname)
+    if (!isInitialLoad) setIsTransitioning(false)
+  }
+
   useEffect(() => {
-    // Reveal the new page once pathname changes (or on initial mount)
-    if (isTransitioning) {
+    // Reveal on initial mount only
+    if (isInitialLoad) {
       const timer = setTimeout(() => {
         setIsTransitioning(false)
         setIsInitialLoad(false)
       }, 50) // slight delay ensures DOM is ready
       return () => clearTimeout(timer)
     }
-  }, [pathname, isTransitioning])
+  }, [isInitialLoad])
 
   return (
     <TransitionContext.Provider value={{ navigateWithTransition }}>
