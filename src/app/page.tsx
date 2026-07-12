@@ -5,7 +5,7 @@ import { motion } from "framer-motion"
 import MuxVideo from "@mux/mux-video/react"
 import { TransitionLink } from "./components/TransitionLink"
 import Image from "next/image"
-import junnLogo from "@/public/junn-images/junn-logo-thin.png"
+import junnLogo from "@/public/images/junn-logo-thin.png"
 
 export default function Home() {
   const [videoReady, setVideoReady] = useState(false)

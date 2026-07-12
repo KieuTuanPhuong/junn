@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react"
 import Image from "next/image"
 import Link from "next/link"
-import junnLogo from "@/public/junn-images/junn-logo.png"
+import junnLogo from "@/public/images/junn-logo.png"
 
 const links = [
   { href: "#what-we-do", label: "What We Do" },
