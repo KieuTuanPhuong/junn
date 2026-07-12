@@ -1,12 +1,13 @@
 "use client"
 
-import { useState } from "react"
+import { useRef, useState } from "react"
 import Image from "next/image"
-import stepMeet from "@/public/junn-images/step-meet.png"
-import stepBrief from "@/public/junn-images/step-brief.png"
-import stepYourFiles from "@/public/junn-images/step-your-files.png"
-import stepFirstLook from "@/public/junn-images/step-first-look.png"
-import stepDelivery from "@/public/junn-images/step-delivery.png"
+import stepMeet from "@/public/images/step-meet.png"
+import stepBrief from "@/public/images/step-brief.png"
+import stepYourFiles from "@/public/images/step-your-files.png"
+import stepFirstLook from "@/public/images/step-first-look.png"
+import stepDelivery from "@/public/images/step-delivery.png"
+import { useScrollReveal } from "@/lib/useScrollReveal"
 
 const steps = [
   {
@@ -43,15 +44,24 @@ const steps = [
 
 export function HowItWorksSection() {
   const [active, setActive] = useState(0)
+  const sectionRef = useRef<HTMLElement>(null)
+  useScrollReveal(sectionRef)
 
   return (
-    <section id="how-it-works" className="flex">
+    <section
+      ref={sectionRef}
+      id="how-it-works"
+      className="flex relative container mx-auto max-[2000px]:mr-0 px-6 md:px-10"
+    >
       <div className="hidden lg:block flex-1"></div>
 
-      <div className="flex-9 flex flex-col gap-8 p-6 pt-24 md:p-10 md:pt-28 lg:p-14 lg:pt-40 relative lg:border-l border-[#E8E8E8]">
-        <div className="flex flex-col gap-11 py-16 lg:py-40">
+      <div className="flex-9 min-w-0 flex flex-col gap-8 relative lg:border-l border-[#E8E8E8]">
+        <div
+          data-reveal
+          className="flex flex-col gap-11 p-6 md:p-10 lg:p-14 py-16 lg:pt-80"
+        >
           <div className="flex items-center gap-2">
-            <span className="hidden lg:block absolute left-[3.5px] -translate-x-full w-2 h-2 rounded-full bg-[#E8E8E8]"></span>
+            <span className="hidden lg:block absolute left-[4.5px] -translate-x-full w-[10px] h-[10px] rounded-full bg-[#E8E8E8]"></span>
             <h2 className="text-sh1">How it works</h2>
           </div>
           <h1 className="text-h1 uppercase">
@@ -84,6 +94,7 @@ export function HowItWorksSection() {
 
         <div className="flex flex-col lg:flex-row gap-16 mt-8">
           <div
+            data-reveal
             className="flex-1 flex flex-col gap-12 group/steps"
             onMouseLeave={() => setActive(0)}
           >
@@ -91,9 +102,9 @@ export function HowItWorksSection() {
               <div
                 key={idx}
                 onMouseEnter={() => setActive(idx)}
-                className="flex gap-4 md:gap-8 items-start group relative cursor-pointer min-h-30"
+                className="flex items-center gap-4 md:gap-8 group relative cursor-pointer min-h-30"
               >
-                <div className="flex flex-col gap-2 w-16 md:w-32 shrink-0">
+                <div className="flex flex-col gap-2 w-16 md:w-32 shrink-0  px-6 md:px-10 lg:px-14">
                   <span className="text-[#8C8C8C] text-sh2">{step.num}</span>
                   <h3 className="text-h3 text-black font-gabarito max-lg:[writing-mode:vertical-rl]">
                     {step.title}
@@ -103,11 +114,11 @@ export function HowItWorksSection() {
                   <span className="text-[#8C8C8C] text-sh2 invisible">
                     {step.num}
                   </span>
-                  <p className="text-b3-regular text-[#4B4B4B] max-w-md">
+                  <p className="text-b3-regular text-[#4B4B4B] max-w-md mt-5">
                     {step.desc}
                   </p>
 
-                  <div className="lg:hidden relative w-full aspect-[4/3] mt-4 overflow-hidden bg-neutral-100">
+                  <div className="lg:hidden relative w-full aspect-4/3 mt-4 overflow-hidden bg-neutral-100">
                     <Image
                       src={step.image}
                       alt={step.title}
@@ -118,10 +129,10 @@ export function HowItWorksSection() {
                   </div>
                 </div>
 
-                <span className="hidden lg:block absolute z-10 w-2 h-2 -bottom-[27.5px] -left-[60.5px] rounded-full bg-[#E8E8E8] opacity-0 transition-all duration-500 ease-out group-hover:opacity-100 group-hover:scale-100"></span>
+                <span className="hidden lg:block absolute z-10 w-2 h-2 bottom-[-27.5px] left-[-4.55px] rounded-full bg-[#E8E8E8] opacity-0 transition-all duration-500 ease-out group-hover:opacity-100 group-hover:scale-100"></span>
 
                 <div
-                  className={`hidden lg:block z-0 absolute w-screen right-80 max-w-[2000px]:right-[600px] translate-x-1/2 -bottom-6 h-px bg-[#E8E8E8] opacity-0 transition-opacity duration-300 group-hover:opacity-100 ${
+                  className={`hidden lg:block z-0 absolute w-screen right-72 max-w-[2000px]:right-[600px] translate-x-1/2 -bottom-6 h-px bg-[#E8E8E8] opacity-0 transition-opacity duration-300 group-hover:opacity-100 ${
                     idx === 0 ? "group-not-[&:hover]/steps:opacity-100" : ""
                   }`}
                 ></div>

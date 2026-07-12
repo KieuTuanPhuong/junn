@@ -3,18 +3,18 @@
 import { useEffect, useRef } from "react"
 import gsap from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
-import { HeroSection } from "@/components/home/HeroSection"
-import { WhatWeDoSection } from "@/components/home/WhatWeDoSection"
-import { HowItWorksSection } from "@/components/home/HowItWorksSection"
-import { AboutUsSection } from "@/components/home/AboutUsSection"
 import { ContactFooter } from "@/components/home/ContactFooter"
 import { MobileNav } from "@/components/home/MobileNav"
 import Image from "next/image"
 import junnLogo from "@/public/images/junn-logo.png"
 import Link from "next/link"
+import { ListRenderComponent } from "./ListRenderComponent"
+import { useScrollReveal } from "@/lib/useScrollReveal"
 
-export default function HomeContent() {
+export default function RenderPageContent() {
   const navRef = useRef<HTMLElement>(null)
+  const contentRef = useRef<HTMLDivElement>(null)
+  useScrollReveal(contentRef)
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger)
@@ -36,11 +36,22 @@ export default function HomeContent() {
       <MobileNav />
 
       <div className="flex">
-        <div className="relative flex-1 min-w-0 bg-white">
-          <HeroSection />
-          <WhatWeDoSection />
-          <HowItWorksSection />
-          <AboutUsSection />
+        <div
+          ref={contentRef}
+          className="flex-1 min-w-0 relative bg-white container mx-auto max-[2000px]:mr-0 px-6 md:px-10"
+        >
+          <div
+            data-reveal
+            className="w-full flex flex-col gap-5 max-xl:pt-10 py-12 my-10"
+          >
+            <h1 className="text-h1 text-black uppercase">Renders</h1>
+            <p className="text-b1 text-[#8C8C8C] max-w-3xl">
+              Crafted renderings that translate architectural vision into
+              compelling visual narratives for investors and buyers.
+            </p>
+          </div>
+
+          <ListRenderComponent />
         </div>
 
         <aside className="w-full h-screen max-w-[239px] shrink-0 sticky top-0 hidden xl:block bg-white border-l border-[#E8E8E8]">

@@ -1,18 +1,26 @@
+"use client"
+
+import { useRef } from "react"
 import Image from "next/image"
-import aboutUsThumbnail from "@/public/junn-images/aboutus-thumbnail.png"
+import aboutUsThumbnail from "@/public/images/aboutus-thumbnail.png"
+import { useScrollReveal } from "@/lib/useScrollReveal"
 
 export function AboutUsSection() {
+  const sectionRef = useRef<HTMLElement>(null)
+  useScrollReveal(sectionRef)
+
   return (
     <section
+      ref={sectionRef}
       id="about-us"
-      className="flex flex-col lg:flex-row relative h-auto lg:h-[160vh]"
+      className="flex flex-col lg:flex-row relative container mx-auto max-[2000px]:mr-0 px-6 md:px-10"
     >
       <div className="hidden lg:block flex-1"></div>
 
-      <div className="flex-9 flex flex-col justify-between gap-8 p-6 md:p-10 lg:p-14 relative lg:border-l border-[#E8E8E8]">
-        <div className="flex flex-col gap-11 py-16 lg:py-40">
+      <div className="flex-9 min-w-0 flex flex-col justify-between gap-8 relative lg:border-l border-[#E8E8E8] py-10 lg:py-20">
+        <div data-reveal className="flex flex-col gap-11 p-6 md:p-10 lg:p-14">
           <div className="flex items-center gap-2">
-            <span className="hidden lg:block absolute left-[3.5px] -translate-x-full w-2 h-2 rounded-full bg-[#E8E8E8]"></span>
+            <span className="hidden lg:block absolute left-[4.5px] -translate-x-full w-[10px] h-[10px] rounded-full bg-[#E8E8E8]"></span>
             <h2 className="text-sh1">About us</h2>
           </div>
           <h1 className="text-h1 uppercase">
@@ -28,8 +36,10 @@ export function AboutUsSection() {
           </p>
         </div>
 
-        <div className="w-full flex justify-end">
-          <div className="flex flex-col gap-3 max-w-[400px]">
+        <div className="relative min-h-[438px] w-full hidden md:block"></div>
+
+        <div data-reveal className="w-full flex justify-end">
+          <div className="flex flex-col gap-3 max-w-[400px] pb-20">
             <p className="text-b3-regular text-[#8C8C8C] mt-5">
               We understand that getting great creative work produced is rarely
               as simple as it should be. So we made it a point to change that.
@@ -54,11 +64,11 @@ export function AboutUsSection() {
         </div>
       </div>
 
-      <div className="relative lg:absolute lg:translate-y-[40%] lg:inset-0">
+      <div className="relative lg:absolute lg:translate-y-[35%] lg:left-0 lg:inset-y-0 w-full">
         <Image
           src={aboutUsThumbnail}
           alt="About Us"
-          objectFit="contain"
+          objectFit="cover"
           className="w-full h-auto lg:h-[400px]"
         />
       </div>

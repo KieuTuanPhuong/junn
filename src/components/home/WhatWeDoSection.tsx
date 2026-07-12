@@ -2,19 +2,20 @@
 
 import { useRef, useState, useEffect } from "react"
 import Image from "next/image"
-import thumbnailAnimation from "@/public/junn-images/thumbnail-animation.png"
-import thumbnailBranding from "@/public/junn-images/thumbnail-branding.png"
-import thumbnailBrochure from "@/public/junn-images/thumbnail-brochure.png"
-import thumbnailRenders from "@/public/junn-images/thumbnail-renders.png"
-import thumbnailWebsite from "@/public/junn-images/thumbnail-website.png"
+import thumbnailAnimation from "@/public/images/thumbnail-animation.png"
+import thumbnailBranding from "@/public/images/thumbnail-branding.png"
+import thumbnailBrochure from "@/public/images/thumbnail-brochure.png"
+import thumbnailRenders from "@/public/images/thumbnail-renders.png"
+import thumbnailWebsite from "@/public/images/thumbnail-website.png"
 import { TransitionLink } from "@/app/components/TransitionLink"
+import { useScrollReveal } from "@/lib/useScrollReveal"
 
 const services = [
-  { image: thumbnailRenders, label: "Renders" },
-  { image: thumbnailAnimation, label: "3D Animation" },
-  { image: thumbnailBranding, label: "Branding" },
-  { image: thumbnailWebsite, label: "Websites" },
-  { image: thumbnailBrochure, label: "Brochure" },
+  { image: thumbnailRenders, label: "Renders", href: "/renders" },
+  { image: thumbnailAnimation, label: "3D Animation", href: "/3d-animation" },
+  { image: thumbnailBranding, label: "Branding", href: "/branding" },
+  { image: thumbnailWebsite, label: "Websites", href: "/websites" },
+  { image: thumbnailBrochure, label: "Brochure", href: "/brochure" },
 ]
 
 export function WhatWeDoSection() {
@@ -23,6 +24,8 @@ export function WhatWeDoSection() {
   const spacerRef = useRef<HTMLDivElement>(null)
   const [leftOffset, setLeftOffset] = useState(0)
   const [rowWidth, setRowWidth] = useState(0)
+
+  useScrollReveal(sectionRef)
 
   useEffect(() => {
     const handleResize = () => {
@@ -44,14 +47,17 @@ export function WhatWeDoSection() {
     <section
       ref={sectionRef}
       id="what-we-do"
-      className="flex relative h-auto lg:h-[170vh] min-[2000px]:h-[140vh]"
+      className="flex relative container mx-auto max-[2000px]:mr-0 px-6 md:px-10"
     >
       <div className="hidden lg:block flex-1"></div>
 
-      <div className="flex-9 min-w-0 flex flex-col gap-8 p-6 md:p-10 lg:p-14 relative lg:border-l border-[#E8E8E8] ">
-        <div className="flex flex-col gap-11 py-20 lg:py-52">
+      <div className="flex-9 min-w-0 flex flex-col gap-8 relative lg:border-l border-[#E8E8E8] ">
+        <div
+          data-reveal
+          className="flex flex-col gap-11 p-6 md:p-10 lg:p-14 py-20 lg:py-52"
+        >
           <div className="flex items-center gap-2">
-            <span className="hidden lg:block absolute left-[3.5px] -translate-x-full w-2 h-2 rounded-full bg-[#E8E8E8]"></span>
+            <span className="hidden lg:block absolute left-[4.5px] -translate-x-full w-[10px] h-[10px] rounded-full bg-[#E8E8E8]"></span>
             <h2 className="text-sh1">What We Do</h2>
           </div>
           <h3 className="text-h3-regular">
@@ -62,9 +68,12 @@ export function WhatWeDoSection() {
           </h3>
         </div>
 
-        <div className="flex flex-col gap-11 py-0">
+        <div
+          data-reveal
+          className="flex flex-col gap-11 p-6 md:p-10 lg:p-14 py-0"
+        >
           <div className="flex items-center gap-2">
-            <span className="hidden lg:block absolute left-[3.5px] -translate-x-full w-2 h-2 rounded-full bg-[#E8E8E8]"></span>
+            <span className="hidden lg:block absolute left-[4.5px] -translate-x-full w-[10px] h-[10px] rounded-full bg-[#E8E8E8]"></span>
             <h2 className="text-sh1">JÜNN&apos;S solution</h2>
           </div>
           <h1 className="text-h1 uppercase">WHAT WE DO</h1>
@@ -82,7 +91,7 @@ export function WhatWeDoSection() {
             {services.map((service) => (
               <TransitionLink
                 key={service.label}
-                href="/home"
+                href={service.href}
                 className="relative shrink-0 snap-start w-[70vw] max-w-[300px]"
               >
                 <div className="bg-[#FDFDFD]">
@@ -99,111 +108,116 @@ export function WhatWeDoSection() {
             ))}
           </div>
         </div>
+
+        <div className="relative min-h-[550px] w-full hidden md:block"></div>
       </div>
 
       <div
         ref={wrapperRef}
-        className="hidden lg:flex absolute bottom-0 max-w-screen"
-        style={{ left: -leftOffset, width: "100vw" }}
+        data-reveal
+        className="hidden lg:flex absolute bottom-0 w-[calc(100%+43px)] -left-10 z-10"
       >
-        <div className="container mx-auto flex relative">
-          <div className="flex-1"></div>
-
-          <div ref={spacerRef} className="w-full max-w-[239px] px-11"></div>
-        </div>
-
-        <div
-          className="absolute bottom-0 left-0 flex max-[2000px]:justify-between justify-end gap-10 items-end"
-          style={{ width: rowWidth }}
-        >
-          <div className="relative group/card w-[200px] h-[265px] lg:w-[240px] lg:h-[318px] xl:w-[286px] xl:h-[379px] bg-[#FDFDFD] translate-y-1/2">
-            <Image
-              src={thumbnailRenders}
-              alt="Jünn"
-              objectFit={"cover"}
-              className="h-full"
-            />
-            <TransitionLink
-              href="/home"
-              className="absolute left-1/2 bottom-4 -translate-x-1/2 -translate-y-1/2 z-10 pointer-events-none group-hover/card:pointer-events-auto opacity-0 group-hover/card:opacity-100 transition-all duration-500 ease-out group flex w-[197px] h-[41px] py-4 px-4 items-center justify-center uppercase tracking-widest text-b3-regular text-white backdrop-blur-[7.5px] bg-[rgba(255,255,255,0.35)] hover:bg-[rgba(255,255,255,0.45)]"
-            >
-              <span className="w-0 h-2 rounded-full bg-white opacity-0 scale-0 mr-0 group-hover:w-2 group-hover:opacity-100 group-hover:scale-100 group-hover:mr-2 transition-all duration-500 ease-out"></span>
-              View
-            </TransitionLink>
-            <div className="w-full text-b2 text-end text-black uppercase mt-4">
-              Renders
+        <div className="absolute bottom-0 left-0 flex z-10 w-full">
+          <div className="flex max-[2000px]:justify-between justify-end gap-10 items-end z-10 w-full">
+            <div className="relative group/card w-[200px] h-[265px] lg:w-[240px] lg:h-[318px] xl:w-[286px] xl:h-[379px] bg-[#FDFDFD] translate-y-1/2">
+              <div className="relative w-full h-full overflow-hidden">
+                <Image
+                  src={thumbnailRenders}
+                  alt="Jünn"
+                  objectFit={"cover"}
+                  className="w-full h-full transition-transform duration-500 ease-out group-hover/card:scale-110"
+                />
+              </div>
+              <TransitionLink
+                href="/renders"
+                className="absolute left-1/2 bottom-4 -translate-x-1/2 -translate-y-1/2 z-10 pointer-events-none group-hover/card:pointer-events-auto opacity-0 group-hover/card:opacity-100 transition-all duration-500 ease-out group flex w-[197px] h-[41px] py-4 px-4 items-center justify-center uppercase tracking-widest text-b3-regular text-white backdrop-blur-[7.5px] bg-[rgba(255,255,255,0.35)] hover:bg-[rgba(255,255,255,0.45)]"
+              >
+                <span className="w-0 h-2 rounded-full bg-white opacity-0 scale-0 mr-0 group-hover:w-2 group-hover:opacity-100 group-hover:scale-100 group-hover:mr-2 transition-all duration-500 ease-out"></span>
+                View
+              </TransitionLink>
+              <div className="w-full text-b2 text-end text-black uppercase mt-4">
+                Renders
+              </div>
             </div>
-          </div>
-          <div className="relative group/card w-[240px] h-[383px] lg:w-[290px] lg:h-[463px] xl:w-[347px] xl:h-[554px] bg-[#FDFDFD]">
-            <Image
-              src={thumbnailAnimation}
-              alt="Jünn"
-              objectFit={"cover"}
-              className="h-full"
-            />
-            <TransitionLink
-              href="/home"
-              className="absolute left-1/2 bottom-4 -translate-x-1/2 -translate-y-1/2 z-10 pointer-events-none group-hover/card:pointer-events-auto opacity-0 group-hover/card:opacity-100 transition-all duration-500 ease-out group flex w-[197px] h-[41px] py-4 px-4 items-center justify-center uppercase tracking-widest text-b3-regular text-white backdrop-blur-[7.5px] bg-[rgba(255,255,255,0.35)] hover:bg-[rgba(255,255,255,0.45)]"
-            >
-              <span className="w-0 h-2 rounded-full bg-white opacity-0 scale-0 mr-0 group-hover:w-2 group-hover:opacity-100 group-hover:scale-100 group-hover:mr-2 transition-all duration-500 ease-out"></span>
-              View
-            </TransitionLink>
-            <div className="w-full text-b2 text-black uppercase mt-4">
-              3D Animation
+            <div className="relative group/card w-[240px] h-[383px] lg:w-[290px] lg:h-[463px] xl:w-[347px] xl:h-[554px] bg-[#FDFDFD]">
+              <div className="relative w-full h-full overflow-hidden">
+                <Image
+                  src={thumbnailAnimation}
+                  alt="Jünn"
+                  objectFit={"cover"}
+                  className="w-full h-full transition-transform duration-500 ease-out group-hover/card:scale-110"
+                />
+              </div>
+              <TransitionLink
+                href="/3d-animation"
+                className="absolute left-1/2 bottom-4 -translate-x-1/2 -translate-y-1/2 z-10 pointer-events-none group-hover/card:pointer-events-auto opacity-0 group-hover/card:opacity-100 transition-all duration-500 ease-out group flex w-[197px] h-[41px] py-4 px-4 items-center justify-center uppercase tracking-widest text-b3-regular text-white backdrop-blur-[7.5px] bg-[rgba(255,255,255,0.35)] hover:bg-[rgba(255,255,255,0.45)]"
+              >
+                <span className="w-0 h-2 rounded-full bg-white opacity-0 scale-0 mr-0 group-hover:w-2 group-hover:opacity-100 group-hover:scale-100 group-hover:mr-2 transition-all duration-500 ease-out"></span>
+                View
+              </TransitionLink>
+              <div className="w-full text-b2 text-black uppercase mt-4">
+                3D Animation
+              </div>
             </div>
-          </div>
-          <div className="relative group/card w-[120px] h-[157px] lg:w-[145px] lg:h-[190px] xl:w-[166px] xl:h-[217px] bg-[#FDFDFD]">
-            <Image
-              src={thumbnailBranding}
-              alt="Jünn"
-              objectFit={"cover"}
-              className="h-full"
-            />
-            <TransitionLink
-              href="/home"
-              className="absolute left-1/2 bottom-4 -translate-x-1/2 -translate-y-1/2 z-10 pointer-events-none group-hover/card:pointer-events-auto opacity-0 group-hover/card:opacity-100 transition-all duration-500 ease-out group flex py-4 px-4 items-center justify-center uppercase tracking-widest text-b3-regular text-white backdrop-blur-[7.5px] bg-[rgba(255,255,255,0.35)] hover:bg-[rgba(255,255,255,0.45)]"
-            >
-              <span className="w-0 h-2 rounded-full bg-white opacity-0 scale-0 mr-0 group-hover:w-2 group-hover:opacity-100 group-hover:scale-100 group-hover:mr-2 transition-all duration-500 ease-out"></span>
-              View
-            </TransitionLink>
-            <div className="w-full text-b2 text-black uppercase mt-4">
-              Branding
+            <div className="relative group/card w-[120px] h-[157px] lg:w-[145px] lg:h-[190px] xl:w-[166px] xl:h-[217px] bg-[#FDFDFD]">
+              <div className="relative w-full h-full overflow-hidden">
+                <Image
+                  src={thumbnailBranding}
+                  alt="Jünn"
+                  objectFit={"cover"}
+                  className="w-full h-full transition-transform duration-500 ease-out group-hover/card:scale-110"
+                />
+              </div>
+              <TransitionLink
+                href="/branding"
+                className="absolute left-1/2 bottom-4 -translate-x-1/2 -translate-y-1/2 z-10 pointer-events-none group-hover/card:pointer-events-auto opacity-0 group-hover/card:opacity-100 transition-all duration-500 ease-out group flex py-4 px-4 items-center justify-center uppercase tracking-widest text-b3-regular text-white backdrop-blur-[7.5px] bg-[rgba(255,255,255,0.35)] hover:bg-[rgba(255,255,255,0.45)]"
+              >
+                <span className="w-0 h-2 rounded-full bg-white opacity-0 scale-0 mr-0 group-hover:w-2 group-hover:opacity-100 group-hover:scale-100 group-hover:mr-2 transition-all duration-500 ease-out"></span>
+                View
+              </TransitionLink>
+              <div className="w-full text-b2 text-black uppercase mt-4">
+                Branding
+              </div>
             </div>
-          </div>
-          <div className="relative group/card w-[120px] h-[157px] lg:w-[145px] lg:h-[190px] xl:w-[166px] xl:h-[217px] bg-[#FDFDFD]">
-            <Image
-              src={thumbnailWebsite}
-              alt="Jünn"
-              objectFit={"cover"}
-              className="h-full"
-            />
-            <TransitionLink
-              href="/home"
-              className="absolute left-1/2 bottom-4 -translate-x-1/2 -translate-y-1/2 z-10 pointer-events-none group-hover/card:pointer-events-auto opacity-0 group-hover/card:opacity-100 transition-all duration-500 ease-out group flex py-4 px-4 items-center justify-center uppercase tracking-widest text-b3-regular text-white backdrop-blur-[7.5px] bg-[rgba(255,255,255,0.35)] hover:bg-[rgba(255,255,255,0.45)]"
-            >
-              <span className="w-0 h-2 rounded-full bg-white opacity-0 scale-0 mr-0 group-hover:w-2 group-hover:opacity-100 group-hover:scale-100 group-hover:mr-2 transition-all duration-500 ease-out"></span>
-              View
-            </TransitionLink>
-            <div className="w-full text-b2 text-black uppercase mt-4">
-              Websites
+            <div className="relative group/card w-[120px] h-[157px] lg:w-[145px] lg:h-[190px] xl:w-[166px] xl:h-[217px] bg-[#FDFDFD]">
+              <div className="relative w-full h-full overflow-hidden">
+                <Image
+                  src={thumbnailWebsite}
+                  alt="Jünn"
+                  objectFit={"cover"}
+                  className="w-full h-full transition-transform duration-500 ease-out group-hover/card:scale-110"
+                />
+              </div>
+              <TransitionLink
+                href="/websites"
+                className="absolute left-1/2 bottom-4 -translate-x-1/2 -translate-y-1/2 z-10 pointer-events-none group-hover/card:pointer-events-auto opacity-0 group-hover/card:opacity-100 transition-all duration-500 ease-out group flex py-4 px-4 items-center justify-center uppercase tracking-widest text-b3-regular text-white backdrop-blur-[7.5px] bg-[rgba(255,255,255,0.35)] hover:bg-[rgba(255,255,255,0.45)]"
+              >
+                <span className="w-0 h-2 rounded-full bg-white opacity-0 scale-0 mr-0 group-hover:w-2 group-hover:opacity-100 group-hover:scale-100 group-hover:mr-2 transition-all duration-500 ease-out"></span>
+                View
+              </TransitionLink>
+              <div className="w-full text-b2 text-black uppercase mt-4">
+                Websites
+              </div>
             </div>
-          </div>
-          <div className="relative group/card w-[120px] h-[157px] lg:w-[145px] lg:h-[190px] xl:w-[166px] xl:h-[217px] bg-[#FDFDFD]">
-            <Image
-              src={thumbnailBrochure}
-              alt="Jünn"
-              objectFit={"cover"}
-              className="h-full"
-            />
-            <TransitionLink
-              href="/home"
-              className="absolute left-1/2 bottom-4 -translate-x-1/2 -translate-y-1/2 z-10 pointer-events-none group-hover/card:pointer-events-auto opacity-0 group-hover/card:opacity-100 transition-all duration-500 ease-out group flex py-4 px-4 items-center justify-center uppercase tracking-widest text-b3-regular text-white backdrop-blur-[7.5px] bg-[rgba(255,255,255,0.35)] hover:bg-[rgba(255,255,255,0.45)]"
-            >
-              <span className="w-0 h-2 rounded-full bg-white opacity-0 scale-0 mr-0 group-hover:w-2 group-hover:opacity-100 group-hover:scale-100 group-hover:mr-2 transition-all duration-500 ease-out"></span>
-              View
-            </TransitionLink>
-            <div className="w-full text-b2 text-black uppercase mt-4">
-              Brochure
+            <div className="relative group/card w-[120px] h-[157px] lg:w-[145px] lg:h-[190px] xl:w-[166px] xl:h-[217px] bg-[#FDFDFD]">
+              <div className="relative w-full h-full overflow-hidden">
+                <Image
+                  src={thumbnailBrochure}
+                  alt="Jünn"
+                  objectFit={"cover"}
+                  className="w-full h-full transition-transform duration-500 ease-out group-hover/card:scale-110"
+                />
+              </div>
+              <TransitionLink
+                href="/brochure"
+                className="absolute left-1/2 bottom-4 -translate-x-1/2 -translate-y-1/2 z-10 pointer-events-none group-hover/card:pointer-events-auto opacity-0 group-hover/card:opacity-100 transition-all duration-500 ease-out group flex py-4 px-4 items-center justify-center uppercase tracking-widest text-b3-regular text-white backdrop-blur-[7.5px] bg-[rgba(255,255,255,0.35)] hover:bg-[rgba(255,255,255,0.45)]"
+              >
+                <span className="w-0 h-2 rounded-full bg-white opacity-0 scale-0 mr-0 group-hover:w-2 group-hover:opacity-100 group-hover:scale-100 group-hover:mr-2 transition-all duration-500 ease-out"></span>
+                View
+              </TransitionLink>
+              <div className="w-full text-b2 text-black uppercase mt-4">
+                Brochure
+              </div>
             </div>
           </div>
         </div>
