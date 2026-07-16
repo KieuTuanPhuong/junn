@@ -25,6 +25,7 @@ export function ContactFooter() {
               className="flex flex-col md:flex-row items-start md:items-center gap-10 md:gap-5 p-6 md:p-10 lg:p-14"
             >
               <div className="flex flex-col gap-8 items-start">
+                <span className="hidden lg:block absolute left-[4.5px] -translate-x-full w-[10px] h-[10px] mt-1 rounded-full bg-[#E8E8E8]"></span>
                 <Link href={"/contact-us"} className="text-sh1 text-black">
                   Contact us
                 </Link>
@@ -63,7 +64,7 @@ export function ContactFooter() {
             © JUNN 2026
           </div>
 
-          <div className="flex-9 relative lg:border-l border-[#E8E8E8]">
+          <div className="flex-9 relative">
             <div
               data-reveal
               className="flex flex-col md:flex-row items-center justify-between gap-5 px-6 md:px-10 lg:px-14 pt-10 lg:pt-16"
@@ -79,21 +80,21 @@ export function ContactFooter() {
 
               <div className="flex flex-col md:flex-row gap-4 justify-between pb-12 pt-0">
                 <Link
-                  href="#what-we-do"
+                  href="/home#what-we-do"
                   className="group flex items-center text-b2 text-black hover:opacity-70 transition-opacity"
                 >
                   <span className="w-2 h-2 mr-2 rounded-full bg-[#E8E8E8] opacity-0 group-hover:opacity-100 transition-all duration-500 ease-out"></span>
                   What We Do
                 </Link>
                 <Link
-                  href="#how-it-works"
+                  href="/home#how-it-works"
                   className="group flex items-center text-b2 text-black hover:opacity-70 transition-opacity"
                 >
                   <span className="w-2 h-2 mr-2 rounded-full bg-[#E8E8E8] opacity-0 group-hover:opacity-100 transition-all duration-500 ease-out"></span>
                   How It Works
                 </Link>
                 <Link
-                  href="#about-us"
+                  href="/home#about-us"
                   className="group flex items-center text-b2 text-black hover:opacity-70 transition-opacity"
                 >
                   <span className="w-2 h-2 mr-2 rounded-full bg-[#E8E8E8] opacity-0 group-hover:opacity-100 transition-all duration-500 ease-out"></span>
@@ -104,15 +105,16 @@ export function ContactFooter() {
           </div>
         </div>
 
-        <div className="max-w-[239px] mx-auto md:mx-0 w-full flex flex-col items-center md:items-start self-stretch justify-end p-6 md:p-12 gap-12 md:border-l border-[#E8E8E8]">
+        <div className="max-w-[239px] mx-auto md:mx-0 w-full flex flex-col items-center md:items-start self-stretch justify-center px-6 md:px-10 lg:px-14 pt-10 lg:pt-16 gap-12 md:border-l border-[#E8E8E8] pb-12">
           <Link
             href="/contact-us"
             className="group relative flex items-center text-b3-bold text-black uppercase hover:opacity-70 transition-opacity"
           >
-            <span className="absolute -left-2 -translate-x-full w-2 h-2 mr-2 rounded-full bg-black opacity-0 group-hover:opacity-100 transition-all duration-500 ease-out"></span>
+            <span className="absolute -left-[51.55px] -translate-x-full w-2.5 h-2.5 mr-2 rounded-full bg-black opacity-0 group-hover:opacity-100 transition-all duration-500 ease-out"></span>
             Let&apos;s Talk
           </Link>
         </div>
+
         <div className="w-full flex items-start md:hidden">
           <Image
             src={junnLogo}

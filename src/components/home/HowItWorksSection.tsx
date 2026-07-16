@@ -58,7 +58,7 @@ export function HowItWorksSection() {
       <div className="flex-9 min-w-0 flex flex-col gap-8 relative lg:border-l border-[#E8E8E8]">
         <div
           data-reveal
-          className="flex flex-col gap-11 p-6 md:p-10 lg:p-14 py-16 lg:pt-80"
+          className="flex flex-col gap-8 p-6 md:p-10 lg:p-14 py-16 lg:pt-80"
         >
           <div className="flex items-center gap-2">
             <span className="hidden lg:block absolute left-[4.5px] -translate-x-full w-[10px] h-[10px] rounded-full bg-[#E8E8E8]"></span>
@@ -102,7 +102,7 @@ export function HowItWorksSection() {
               <div
                 key={idx}
                 onMouseEnter={() => setActive(idx)}
-                className="flex items-center gap-4 md:gap-8 group relative cursor-pointer min-h-30"
+                className="flex gap-4 md:gap-8 group relative cursor-pointer min-h-30"
               >
                 <div className="flex flex-col gap-2 w-16 md:w-32 shrink-0  px-6 md:px-10 lg:px-14">
                   <span className="text-[#8C8C8C] text-sh2">{step.num}</span>
@@ -114,7 +114,7 @@ export function HowItWorksSection() {
                   <span className="text-[#8C8C8C] text-sh2 invisible">
                     {step.num}
                   </span>
-                  <p className="text-b3-regular text-[#4B4B4B] max-w-md mt-5">
+                  <p className="text-b3-regular text-[#4B4B4B] max-w-md">
                     {step.desc}
                   </p>
 
@@ -129,10 +129,10 @@ export function HowItWorksSection() {
                   </div>
                 </div>
 
-                <span className="hidden lg:block absolute z-10 w-2 h-2 bottom-[-27.5px] left-[-4.55px] rounded-full bg-[#E8E8E8] opacity-0 transition-all duration-500 ease-out group-hover:opacity-100 group-hover:scale-100"></span>
+                <span className="hidden lg:block absolute z-10 w-2.5 h-2.5 bottom-[-4.5px] left-[-5.55px] rounded-full bg-[#E8E8E8] opacity-0 transition-all duration-500 ease-out group-hover:opacity-100 group-hover:scale-100"></span>
 
                 <div
-                  className={`hidden lg:block z-0 absolute w-screen right-72 max-w-[2000px]:right-[600px] translate-x-1/2 -bottom-6 h-px bg-[#E8E8E8] opacity-0 transition-opacity duration-300 group-hover:opacity-100 ${
+                  className={`hidden lg:block z-0 absolute w-screen right-72 max-w-[2000px]:right-[600px] translate-x-1/2 bottom-0 h-px bg-[#E8E8E8] opacity-0 transition-opacity duration-500 group-hover:opacity-100 ${
                     idx === 0 ? "group-not-[&:hover]/steps:opacity-100" : ""
                   }`}
                 ></div>

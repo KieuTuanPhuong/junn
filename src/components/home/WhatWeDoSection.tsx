@@ -54,29 +54,13 @@ export function WhatWeDoSection() {
       <div className="flex-9 min-w-0 flex flex-col gap-8 relative lg:border-l border-[#E8E8E8] ">
         <div
           data-reveal
-          className="flex flex-col gap-11 p-6 md:p-10 lg:p-14 py-20 lg:py-52"
+          className="flex flex-col gap-8 p-6 md:p-10 lg:p-14 py-0"
         >
           <div className="flex items-center gap-2">
             <span className="hidden lg:block absolute left-[4.5px] -translate-x-full w-[10px] h-[10px] rounded-full bg-[#E8E8E8]"></span>
             <h2 className="text-sh1">What We Do</h2>
           </div>
-          <h3 className="text-h3-regular">
-            Every successful project starts with a great concept. We transform
-            your <br className="hidden lg:inline" /> concept into a vision of
-            total clarity - presented in one seamless, beautifully{" "}
-            <br className="hidden lg:inline" /> packaged experience.
-          </h3>
-        </div>
-
-        <div
-          data-reveal
-          className="flex flex-col gap-11 p-6 md:p-10 lg:p-14 py-0"
-        >
-          <div className="flex items-center gap-2">
-            <span className="hidden lg:block absolute left-[4.5px] -translate-x-full w-[10px] h-[10px] rounded-full bg-[#E8E8E8]"></span>
-            <h2 className="text-sh1">JÜNN&apos;S solution</h2>
-          </div>
-          <h1 className="text-h1 uppercase">WHAT WE DO</h1>
+          <h1 className="text-h1 uppercase">JÜNN&apos;s solution</h1>
           <p className="text-b3-regular text-[#8C8C8C] mt-5">
             Every successful project starts with a great concept. We transform{" "}
             <br className="hidden lg:inline" />
@@ -109,17 +93,17 @@ export function WhatWeDoSection() {
           </div>
         </div>
 
-        <div className="relative min-h-[550px] w-full hidden md:block"></div>
+        <div className="relative min-h-[650px] w-full hidden md:block"></div>
       </div>
 
       <div
         ref={wrapperRef}
         data-reveal
-        className="hidden lg:flex absolute bottom-0 w-[calc(100%+43px)] -left-10 z-10"
+        className="hidden lg:flex absolute bottom-0 w-[calc(100%+41px)] -left-10 z-10"
       >
         <div className="absolute bottom-0 left-0 flex z-10 w-full">
-          <div className="flex max-[2000px]:justify-between justify-end gap-10 items-end z-10 w-full">
-            <div className="relative group/card w-[200px] h-[265px] lg:w-[240px] lg:h-[318px] xl:w-[286px] xl:h-[379px] bg-[#FDFDFD] translate-y-1/2">
+          <div className="flex justify-end gap-5 items-end z-10 w-full">
+            <div className="relative group/card basis-0 grow-286 min-w-0 aspect-286/379 bg-[#FDFDFD] translate-y-1/2">
               <div className="relative w-full h-full overflow-hidden">
                 <Image
                   src={thumbnailRenders}
@@ -130,16 +114,17 @@ export function WhatWeDoSection() {
               </div>
               <TransitionLink
                 href="/renders"
-                className="absolute left-1/2 bottom-4 -translate-x-1/2 -translate-y-1/2 z-10 pointer-events-none group-hover/card:pointer-events-auto opacity-0 group-hover/card:opacity-100 transition-all duration-500 ease-out group flex w-[197px] h-[41px] py-4 px-4 items-center justify-center uppercase tracking-widest text-b3-regular text-white backdrop-blur-[7.5px] bg-[rgba(255,255,255,0.35)] hover:bg-[rgba(255,255,255,0.45)]"
+                className="absolute left-1/2 bottom-4 -translate-x-1/2 -translate-y-1/2 z-10 pointer-events-none group-hover/card:pointer-events-auto opacity-0 group-hover/card:opacity-100 transition-all duration-500 ease-out group flex w-[197px] h-10 py-4 px-4 items-center justify-center uppercase tracking-widest text-b3-regular text-white backdrop-blur-[7.5px] bg-[rgba(255,255,255,0.35)] hover:bg-[rgba(255,255,255,0.45)]"
               >
                 <span className="w-0 h-2 rounded-full bg-white opacity-0 scale-0 mr-0 group-hover:w-2 group-hover:opacity-100 group-hover:scale-100 group-hover:mr-2 transition-all duration-500 ease-out"></span>
                 View
               </TransitionLink>
-              <div className="w-full text-b2 text-end text-black uppercase mt-4">
+              <div className="absolute top-full left-0 w-full text-b2 text-end text-black uppercase mt-4">
                 Renders
               </div>
             </div>
-            <div className="relative group/card w-[240px] h-[383px] lg:w-[290px] lg:h-[463px] xl:w-[347px] xl:h-[554px] bg-[#FDFDFD]">
+
+            <div className="relative group/card basis-0 grow-347 min-w-0 aspect-347/554 bg-[#FDFDFD]">
               <div className="relative w-full h-full overflow-hidden">
                 <Image
                   src={thumbnailAnimation}
@@ -150,16 +135,17 @@ export function WhatWeDoSection() {
               </div>
               <TransitionLink
                 href="/3d-animation"
-                className="absolute left-1/2 bottom-4 -translate-x-1/2 -translate-y-1/2 z-10 pointer-events-none group-hover/card:pointer-events-auto opacity-0 group-hover/card:opacity-100 transition-all duration-500 ease-out group flex w-[197px] h-[41px] py-4 px-4 items-center justify-center uppercase tracking-widest text-b3-regular text-white backdrop-blur-[7.5px] bg-[rgba(255,255,255,0.35)] hover:bg-[rgba(255,255,255,0.45)]"
+                className="absolute left-1/2 bottom-4 -translate-x-1/2 -translate-y-1/2 z-10 pointer-events-none group-hover/card:pointer-events-auto opacity-0 group-hover/card:opacity-100 transition-all duration-500 ease-out group flex w-[197px] h-10 py-4 px-4 items-center justify-center uppercase tracking-widest text-b3-regular text-white backdrop-blur-[7.5px] bg-[rgba(255,255,255,0.35)] hover:bg-[rgba(255,255,255,0.45)]"
               >
                 <span className="w-0 h-2 rounded-full bg-white opacity-0 scale-0 mr-0 group-hover:w-2 group-hover:opacity-100 group-hover:scale-100 group-hover:mr-2 transition-all duration-500 ease-out"></span>
                 View
               </TransitionLink>
-              <div className="w-full text-b2 text-black uppercase mt-4">
+              <div className="absolute top-full left-0 w-full text-b2 text-black uppercase mt-4">
                 3D Animation
               </div>
             </div>
-            <div className="relative group/card w-[120px] h-[157px] lg:w-[145px] lg:h-[190px] xl:w-[166px] xl:h-[217px] bg-[#FDFDFD]">
+
+            <div className="relative group/card basis-0 grow-166 min-w-0 aspect-166/217 bg-[#FDFDFD]">
               <div className="relative w-full h-full overflow-hidden">
                 <Image
                   src={thumbnailBranding}
@@ -170,16 +156,17 @@ export function WhatWeDoSection() {
               </div>
               <TransitionLink
                 href="/branding"
-                className="absolute left-1/2 bottom-4 -translate-x-1/2 -translate-y-1/2 z-10 pointer-events-none group-hover/card:pointer-events-auto opacity-0 group-hover/card:opacity-100 transition-all duration-500 ease-out group flex py-4 px-4 items-center justify-center uppercase tracking-widest text-b3-regular text-white backdrop-blur-[7.5px] bg-[rgba(255,255,255,0.35)] hover:bg-[rgba(255,255,255,0.45)]"
+                className="absolute left-1/2 bottom-4 -translate-x-1/2 -translate-y-1/2 z-10 pointer-events-none group-hover/card:pointer-events-auto opacity-0 group-hover/card:opacity-100 transition-all duration-500 ease-out group flex w-20 h-10 py-4 px-4 items-center justify-center uppercase tracking-widest text-b3-regular text-white backdrop-blur-[7.5px] bg-[rgba(255,255,255,0.35)] hover:bg-[rgba(255,255,255,0.45)]"
               >
                 <span className="w-0 h-2 rounded-full bg-white opacity-0 scale-0 mr-0 group-hover:w-2 group-hover:opacity-100 group-hover:scale-100 group-hover:mr-2 transition-all duration-500 ease-out"></span>
                 View
               </TransitionLink>
-              <div className="w-full text-b2 text-black uppercase mt-4">
+              <div className="absolute top-full left-0 w-full text-b2 text-black uppercase mt-4">
                 Branding
               </div>
             </div>
-            <div className="relative group/card w-[120px] h-[157px] lg:w-[145px] lg:h-[190px] xl:w-[166px] xl:h-[217px] bg-[#FDFDFD]">
+
+            <div className="relative group/card basis-0 grow-166 min-w-0 aspect-166/217 bg-[#FDFDFD]">
               <div className="relative w-full h-full overflow-hidden">
                 <Image
                   src={thumbnailWebsite}
@@ -190,16 +177,17 @@ export function WhatWeDoSection() {
               </div>
               <TransitionLink
                 href="/websites"
-                className="absolute left-1/2 bottom-4 -translate-x-1/2 -translate-y-1/2 z-10 pointer-events-none group-hover/card:pointer-events-auto opacity-0 group-hover/card:opacity-100 transition-all duration-500 ease-out group flex py-4 px-4 items-center justify-center uppercase tracking-widest text-b3-regular text-white backdrop-blur-[7.5px] bg-[rgba(255,255,255,0.35)] hover:bg-[rgba(255,255,255,0.45)]"
+                className="absolute left-1/2 bottom-4 -translate-x-1/2 -translate-y-1/2 z-10 pointer-events-none group-hover/card:pointer-events-auto opacity-0 group-hover/card:opacity-100 transition-all duration-500 ease-out group flex w-20 h-10 py-4 px-4 items-center justify-center uppercase tracking-widest text-b3-regular text-white backdrop-blur-[7.5px] bg-[rgba(255,255,255,0.35)] hover:bg-[rgba(255,255,255,0.45)]"
               >
                 <span className="w-0 h-2 rounded-full bg-white opacity-0 scale-0 mr-0 group-hover:w-2 group-hover:opacity-100 group-hover:scale-100 group-hover:mr-2 transition-all duration-500 ease-out"></span>
                 View
               </TransitionLink>
-              <div className="w-full text-b2 text-black uppercase mt-4">
+              <div className="absolute top-full left-0 w-full text-b2 text-black uppercase mt-4">
                 Websites
               </div>
             </div>
-            <div className="relative group/card w-[120px] h-[157px] lg:w-[145px] lg:h-[190px] xl:w-[166px] xl:h-[217px] bg-[#FDFDFD]">
+
+            <div className="relative group/card basis-0 grow-166 min-w-0 aspect-166/217 bg-[#FDFDFD]">
               <div className="relative w-full h-full overflow-hidden">
                 <Image
                   src={thumbnailBrochure}
@@ -210,12 +198,12 @@ export function WhatWeDoSection() {
               </div>
               <TransitionLink
                 href="/brochure"
-                className="absolute left-1/2 bottom-4 -translate-x-1/2 -translate-y-1/2 z-10 pointer-events-none group-hover/card:pointer-events-auto opacity-0 group-hover/card:opacity-100 transition-all duration-500 ease-out group flex py-4 px-4 items-center justify-center uppercase tracking-widest text-b3-regular text-white backdrop-blur-[7.5px] bg-[rgba(255,255,255,0.35)] hover:bg-[rgba(255,255,255,0.45)]"
+                className="absolute left-1/2 bottom-4 -translate-x-1/2 -translate-y-1/2 z-10 pointer-events-none group-hover/card:pointer-events-auto opacity-0 group-hover/card:opacity-100 transition-all duration-500 ease-out group flex w-20 h-10 py-4 px-4 items-center justify-center uppercase tracking-widest text-b3-regular text-white backdrop-blur-[7.5px] bg-[rgba(255,255,255,0.35)] hover:bg-[rgba(255,255,255,0.45)]"
               >
                 <span className="w-0 h-2 rounded-full bg-white opacity-0 scale-0 mr-0 group-hover:w-2 group-hover:opacity-100 group-hover:scale-100 group-hover:mr-2 transition-all duration-500 ease-out"></span>
                 View
               </TransitionLink>
-              <div className="w-full text-b2 text-black uppercase mt-4">
+              <div className="absolute top-full left-0 w-full text-b2 text-black uppercase mt-4">
                 Brochure
               </div>
             </div>
