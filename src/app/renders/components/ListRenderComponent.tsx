@@ -240,10 +240,18 @@ export function ListRenderComponent() {
                 onClick={() => setSelectedIndex(index)}
                 className="flex group w-full cursor-pointer"
               >
-                <div className="flex-1 border-r border-[#E8E8E8]"></div>
+                <div
+                  className={cn(
+                    "flex-1",
+                    index !== 0 && "border-r border-[#E8E8E8]",
+                  )}
+                ></div>
                 <div
                   ref={index === 0 ? anchorRef : undefined}
-                  className="flex-9 flex flex-col gap-12 py-12 relative"
+                  className={cn(
+                    "flex-9 flex flex-col gap-12 relative",
+                    index === 0 ? "pt-12" : "pt-[150px]",
+                  )}
                 >
                   <div className="flex gap-[48px]">
                     <span className="z-10 w-[10px] h-[10px] rounded-full bg-[#E8E8E8] translate-x-[-5px] translate-y-[3px] group-hover:bg-black transition-colors duration-300"></span>
@@ -261,7 +269,7 @@ export function ListRenderComponent() {
                   <div
                     data-reveal-frame
                     className={cn(
-                      "absolute bottom-12 h-[550px] overflow-hidden bg-[#E8E8E8]",
+                      "absolute bottom-0 h-[550px] overflow-hidden bg-[#E8E8E8]",
                     )}
                     style={{ left: bleed.left, width: bleed.width }}
                   >
@@ -288,10 +296,10 @@ export function ListRenderComponent() {
                 className="flex group w-full cursor-pointer"
               >
                 <div className="flex-1 border-r border-[#E8E8E8]"></div>
-                <div className="flex-4 relative">
+                <div className="flex-3 relative">
                   <span className="absolute top-1/2 left-0 translate-x-[-5px] translate-y-[-4px] z-10 w-[10px] h-[10px] rounded-full bg-[#E8E8E8] group-hover:bg-black transition-colors duration-300"></span>
                 </div>
-                <div className="flex-5 flex flex-col gap-12 py-12 relative">
+                <div className="flex-6 flex flex-col gap-12 pt-[150px] relative">
                   <div className="flex flex-col gap-3 ml-10">
                     <span className="text-sh1 text-black">{item.location}</span>
                     <h3 className="text-h3 text-black">{item.title}</h3>
@@ -306,7 +314,7 @@ export function ListRenderComponent() {
                   <div
                     data-reveal-frame
                     className={cn(
-                      "absolute bottom-12 left-10 w-full h-[473px] overflow-hidden bg-[#E8E8E8]",
+                      "absolute bottom-0 left-10 w-full h-[473px] overflow-hidden bg-[#E8E8E8]",
                     )}
                   >
                     <Image
@@ -332,7 +340,7 @@ export function ListRenderComponent() {
                 className="flex group w-full cursor-pointer"
               >
                 <div className="flex-1 border-r border-[#E8E8E8]"></div>
-                <div className="flex-9 flex flex-col gap-12 py-12 relative">
+                <div className="flex-9 flex flex-col gap-12 pt-[150px] relative">
                   <div className="flex gap-[48px]">
                     <span className="z-10 w-[10px] h-[10px] rounded-full bg-[#E8E8E8] translate-x-[-5px] translate-y-[3px] group-hover:bg-black transition-colors duration-300"></span>
 
@@ -349,7 +357,7 @@ export function ListRenderComponent() {
                   <div
                     data-reveal-frame
                     className={cn(
-                      "absolute bottom-12 left-0 w-full max-w-[646px] h-[381px] overflow-hidden bg-[#E8E8E8]",
+                      "absolute bottom-0 left-0 w-full max-w-[646px] h-[381px] overflow-hidden bg-[#E8E8E8]",
                     )}
                   >
                     <Image
@@ -378,7 +386,7 @@ export function ListRenderComponent() {
                 <div className="flex-1 relative">
                   <span className="absolute top-1/2 left-0 translate-x-[-5px] translate-y-[-4px] z-10 w-[10px] h-[10px] rounded-full bg-[#E8E8E8] group-hover:bg-black transition-colors duration-300"></span>
                 </div>
-                <div className="flex-8 flex flex-col gap-12 py-12 relative">
+                <div className="flex-8 flex flex-col gap-12 pt-[150px] relative">
                   <div className="flex flex-col gap-3">
                     <span className="text-sh1 text-black">{item.location}</span>
                     <h3 className="text-h3 text-black">{item.title}</h3>
@@ -393,7 +401,7 @@ export function ListRenderComponent() {
                   <div
                     data-reveal-frame
                     className={cn(
-                      "absolute bottom-12 left-0 mx-auto w-full max-w-[757px] h-[611px] overflow-hidden bg-[#E8E8E8]",
+                      "absolute bottom-0 left-0 mx-auto w-full max-w-[757px] h-[611px] overflow-hidden bg-[#E8E8E8]",
                     )}
                   >
                     <Image
@@ -460,9 +468,9 @@ export function ListRenderComponent() {
               </div>
             </div>
 
-            <div className="absolute right-0 bottom-1/5 translate-y-[12px] flex flex-col items-end gap-6 z-20">
+            <div className="absolute right-0 bottom-1/5 translate-y-[12px] flex flex-col items-end gap-6 z-5">
               <div className="flex items-center relative z-5">
-                <div className="flex gap-4 px-10">
+                <div className="flex gap-2 px-10">
                   <button
                     onClick={handlePrev}
                     className="w-[48px] h-[48px] rounded-full border border-[#E8E8E8] flex items-center justify-center text-[#8C8C8C] hover:text-black hover:border-black transition-colors bg-white"

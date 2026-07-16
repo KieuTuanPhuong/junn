@@ -18,7 +18,7 @@ export function AboutUsSection() {
       <div className="hidden lg:block flex-1"></div>
 
       <div className="flex-9 min-w-0 flex flex-col justify-between gap-8 relative lg:border-l border-[#E8E8E8] py-10 lg:py-20">
-        <div data-reveal className="flex flex-col gap-11 p-6 md:p-10 lg:p-14">
+        <div data-reveal className="flex flex-col gap-8 p-6 md:p-10 lg:p-14">
           <div className="flex items-center gap-2">
             <span className="hidden lg:block absolute left-[4.5px] -translate-x-full w-[10px] h-[10px] rounded-full bg-[#E8E8E8]"></span>
             <h2 className="text-sh1">About us</h2>
@@ -62,15 +62,14 @@ export function AboutUsSection() {
             </p>
           </div>
         </div>
-      </div>
 
-      <div className="relative lg:absolute lg:translate-y-[35%] lg:left-0 lg:inset-y-0 w-full">
-        <Image
-          src={aboutUsThumbnail}
-          alt="About Us"
-          objectFit="cover"
-          className="w-full h-auto lg:h-[400px]"
-        />
+        <div className="relative -mx-6 md:-mx-10 lg:mx-0 lg:absolute lg:translate-y-[35%] lg:left-0 lg:-right-10 lg:inset-y-0 lg:w-auto">
+          <Image
+            src={aboutUsThumbnail}
+            alt="About Us"
+            className="w-full h-auto lg:h-[400px] object-cover"
+          />
+        </div>
       </div>
     </section>
   )

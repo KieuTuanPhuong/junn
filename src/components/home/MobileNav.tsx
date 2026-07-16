@@ -6,9 +6,9 @@ import Link from "next/link"
 import junnLogo from "@/public/images/junn-logo.png"
 
 const links = [
-  { href: "#what-we-do", label: "What We Do" },
-  { href: "#how-it-works", label: "How It Works" },
-  { href: "#about-us", label: "About Us" },
+  { href: "/home#what-we-do", label: "What We Do" },
+  { href: "/home#how-it-works", label: "How It Works" },
+  { href: "/home#about-us", label: "About Us" },
 ]
 
 export function MobileNav() {
