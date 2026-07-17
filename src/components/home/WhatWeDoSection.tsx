@@ -12,10 +12,26 @@ import { useScrollReveal } from "@/lib/useScrollReveal"
 
 const services = [
   { image: thumbnailRenders, label: "Renders", href: "/renders" },
-  { image: thumbnailAnimation, label: "3D Animation", href: "/3d-animation" },
-  { image: thumbnailBranding, label: "Branding", href: "/branding" },
-  { image: thumbnailWebsite, label: "Websites", href: "/websites" },
-  { image: thumbnailBrochure, label: "Brochure", href: "/brochure" },
+  {
+    image: thumbnailAnimation,
+    label: "3D Animation",
+    href: "https://aurum-demo-six.vercel.app/",
+  },
+  {
+    image: thumbnailBranding,
+    label: "Branding",
+    href: "https://aurum-demo-six.vercel.app/home",
+  },
+  {
+    image: thumbnailWebsite,
+    label: "Websites",
+    href: "https://aurum-demo-six.vercel.app/home",
+  },
+  {
+    image: thumbnailBrochure,
+    label: "Brochure",
+    href: "https://aurum-demo-six.vercel.app/home",
+  },
 ]
 
 export function WhatWeDoSection() {
@@ -93,7 +109,7 @@ export function WhatWeDoSection() {
           </div>
         </div>
 
-        <div className="relative min-h-[750px] w-full hidden md:block"></div>
+        <div className="relative min-h-[750px] lg:min-h-[850px] 2xl:min-h-[900px] w-full hidden md:block"></div>
       </div>
 
       <div
@@ -134,7 +150,7 @@ export function WhatWeDoSection() {
                 />
               </div>
               <TransitionLink
-                href="/3d-animation"
+                href="https://aurum-demo-six.vercel.app/"
                 className="absolute left-1/2 bottom-4 -translate-x-1/2 -translate-y-1/2 z-10 pointer-events-none group-hover/card:pointer-events-auto opacity-0 group-hover/card:opacity-100 transition-all duration-500 ease-out group flex w-[197px] h-10 py-4 px-4 items-center justify-center uppercase tracking-widest text-b3-regular text-white backdrop-blur-[7.5px] bg-[rgba(255,255,255,0.35)] hover:bg-[rgba(255,255,255,0.45)]"
               >
                 <span className="w-0 h-2 rounded-full bg-white opacity-0 scale-0 mr-0 group-hover:w-2 group-hover:opacity-100 group-hover:scale-100 group-hover:mr-2 transition-all duration-500 ease-out"></span>
@@ -155,7 +171,7 @@ export function WhatWeDoSection() {
                 />
               </div>
               <TransitionLink
-                href="/branding"
+                href="https://aurum-demo-six.vercel.app/home"
                 className="absolute left-1/2 bottom-4 -translate-x-1/2 -translate-y-1/2 z-10 pointer-events-none group-hover/card:pointer-events-auto opacity-0 group-hover/card:opacity-100 transition-all duration-500 ease-out group flex w-20 h-10 py-4 px-4 items-center justify-center uppercase tracking-widest text-b3-regular text-white backdrop-blur-[7.5px] bg-[rgba(255,255,255,0.35)] hover:bg-[rgba(255,255,255,0.45)]"
               >
                 <span className="w-0 h-2 rounded-full bg-white opacity-0 scale-0 mr-0 group-hover:w-2 group-hover:opacity-100 group-hover:scale-100 group-hover:mr-2 transition-all duration-500 ease-out"></span>
@@ -176,7 +192,7 @@ export function WhatWeDoSection() {
                 />
               </div>
               <TransitionLink
-                href="/websites"
+                href="https://aurum-demo-six.vercel.app/home"
                 className="absolute left-1/2 bottom-4 -translate-x-1/2 -translate-y-1/2 z-10 pointer-events-none group-hover/card:pointer-events-auto opacity-0 group-hover/card:opacity-100 transition-all duration-500 ease-out group flex w-20 h-10 py-4 px-4 items-center justify-center uppercase tracking-widest text-b3-regular text-white backdrop-blur-[7.5px] bg-[rgba(255,255,255,0.35)] hover:bg-[rgba(255,255,255,0.45)]"
               >
                 <span className="w-0 h-2 rounded-full bg-white opacity-0 scale-0 mr-0 group-hover:w-2 group-hover:opacity-100 group-hover:scale-100 group-hover:mr-2 transition-all duration-500 ease-out"></span>
@@ -197,7 +213,7 @@ export function WhatWeDoSection() {
                 />
               </div>
               <TransitionLink
-                href="/brochure"
+                href="https://aurum-demo-six.vercel.app/home"
                 className="absolute left-1/2 bottom-4 -translate-x-1/2 -translate-y-1/2 z-10 pointer-events-none group-hover/card:pointer-events-auto opacity-0 group-hover/card:opacity-100 transition-all duration-500 ease-out group flex w-20 h-10 py-4 px-4 items-center justify-center uppercase tracking-widest text-b3-regular text-white backdrop-blur-[7.5px] bg-[rgba(255,255,255,0.35)] hover:bg-[rgba(255,255,255,0.45)]"
               >
                 <span className="w-0 h-2 rounded-full bg-white opacity-0 scale-0 mr-0 group-hover:w-2 group-hover:opacity-100 group-hover:scale-100 group-hover:mr-2 transition-all duration-500 ease-out"></span>

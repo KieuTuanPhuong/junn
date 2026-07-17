@@ -39,7 +39,7 @@ export function AboutUsSection() {
         <div className="relative min-h-[438px] w-full hidden md:block"></div>
 
         <div data-reveal className="w-full flex justify-end">
-          <div className="flex flex-col gap-3 max-w-[400px] pb-20">
+          <div className="flex flex-col gap-3 max-w-[400px] pb-20 px-6 md:px-10 lg:px-14">
             <p className="text-b3-regular text-[#8C8C8C] mt-5">
               We understand that getting great creative work produced is rarely
               as simple as it should be. So we made it a point to change that.
