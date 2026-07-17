@@ -51,7 +51,7 @@ export function WhatWeDoSection() {
     >
       <div className="hidden lg:block flex-1"></div>
 
-      <div className="flex-9 min-w-0 flex flex-col gap-8 relative lg:border-l border-[#E8E8E8] ">
+      <div className="flex-9 min-w-0 flex flex-col gap-8 relative lg:border-l border-[#E8E8E8] pt-[200px]">
         <div
           data-reveal
           className="flex flex-col gap-8 p-6 md:p-10 lg:p-14 py-0"
@@ -93,13 +93,13 @@ export function WhatWeDoSection() {
           </div>
         </div>
 
-        <div className="relative min-h-[650px] w-full hidden md:block"></div>
+        <div className="relative min-h-[750px] w-full hidden md:block"></div>
       </div>
 
       <div
         ref={wrapperRef}
         data-reveal
-        className="hidden lg:flex absolute bottom-0 w-[calc(100%+41px)] -left-10 z-10"
+        className="hidden lg:flex absolute bottom-[10%] w-[calc(100%+41px)] -left-10 z-10"
       >
         <div className="absolute bottom-0 left-0 flex z-10 w-full">
           <div className="flex justify-end gap-5 items-end z-10 w-full">
