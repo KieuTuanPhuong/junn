@@ -12,7 +12,7 @@ export function HeroSection() {
   return (
     <section
       ref={sectionRef}
-      className="flex flex-col gap-12 py-12 container mx-auto max-[2000px]:mr-0 px-6 md:px-10"
+      className="flex flex-col gap-12 pt-12 container mx-auto max-[2000px]:mr-0 px-6 md:px-10"
     >
       {/* Hero Content */}
       <div className="flex flex-col gap-8 mt-12 lg:min-h-screen">

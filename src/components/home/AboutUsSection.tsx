@@ -17,7 +17,7 @@ export function AboutUsSection() {
     >
       <div className="hidden lg:block flex-1"></div>
 
-      <div className="flex-9 min-w-0 flex flex-col justify-between gap-8 relative lg:border-l border-[#E8E8E8] py-10 lg:py-20">
+      <div className="flex-9 min-w-0 flex flex-col justify-between gap-8 relative lg:border-l border-[#E8E8E8] py-10 lg:py-20 pt-[200px]!">
         <div data-reveal className="flex flex-col gap-8 p-6 md:p-10 lg:p-14">
           <div className="flex items-center gap-2">
             <span className="hidden lg:block absolute left-[4.5px] -translate-x-full w-[10px] h-[10px] rounded-full bg-[#E8E8E8]"></span>
