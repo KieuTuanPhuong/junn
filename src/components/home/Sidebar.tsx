@@ -62,7 +62,7 @@ export function Sidebar() {
               href="/contact-us"
               className="group relative flex items-center transition-opacity"
             >
-              <span className="absolute left-[-40.55px] -translate-x-full w-2 h-2 mr-2 rounded-full bg-black opacity-0 group-hover:opacity-100 transition-all duration-500 ease-out"></span>
+              <span className="absolute left-[-40.55px] -translate-x-full w-2 h-2 mr-2 rounded-full bg-black opacity-0 group-hover:opacity-100 transition-all duration-500 ease-out z-55"></span>
               <p className="group-hover:opacity-70 text-b3-bold text-black uppercase">
                 Let&apos;s Talk
               </p>

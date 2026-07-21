@@ -38,6 +38,8 @@ export function WhatWeDoSection() {
   const sectionRef = useRef<HTMLElement>(null)
   const wrapperRef = useRef<HTMLDivElement>(null)
   const spacerRef = useRef<HTMLDivElement>(null)
+  const sliderRef = useRef<HTMLDivElement>(null)
+  const sliderPausedRef = useRef(false)
   const [leftOffset, setLeftOffset] = useState(0)
   const [rowWidth, setRowWidth] = useState(0)
 
@@ -57,6 +59,42 @@ export function WhatWeDoSection() {
     handleResize()
     window.addEventListener("resize", handleResize)
     return () => window.removeEventListener("resize", handleResize)
+  }, [])
+
+  useEffect(() => {
+    const slider = sliderRef.current
+    if (!slider) return
+
+    const pause = () => {
+      sliderPausedRef.current = true
+    }
+    const resume = () => {
+      sliderPausedRef.current = false
+    }
+
+    slider.addEventListener("touchstart", pause, { passive: true })
+    slider.addEventListener("touchend", resume, { passive: true })
+
+    const interval = setInterval(() => {
+      // offsetWidth 0 = hidden on lg, skip
+      if (sliderPausedRef.current || slider.offsetWidth === 0) return
+
+      const card = slider.querySelector<HTMLElement>(".snap-start")
+      if (!card) return
+      const step = card.offsetWidth + 16
+      const setWidth = step * services.length
+      // past first set: jump back one set (identical content, invisible) before advancing
+      if (slider.scrollLeft >= setWidth) {
+        slider.scrollLeft -= setWidth
+      }
+      slider.scrollBy({ left: step, behavior: "smooth" })
+    }, 3000)
+
+    return () => {
+      clearInterval(interval)
+      slider.removeEventListener("touchstart", pause)
+      slider.removeEventListener("touchend", resume)
+    }
   }, [])
 
   return (
@@ -86,31 +124,40 @@ export function WhatWeDoSection() {
           </p>
         </div>
 
-        <div className="lg:hidden -mx-6 md:-mx-10 mt-4 overflow-x-auto no-scrollbar snap-x snap-mandatory">
-          <div className="flex gap-4 px-6 md:px-10 items-end">
-            {services.map((service) => (
-              <TransitionLink
-                key={service.label}
-                href={service.href}
-                className="relative shrink-0 snap-start w-[70vw] max-w-[300px]"
-              >
-                <div className="bg-[#FDFDFD]">
-                  <Image
-                    src={service.image}
-                    alt={service.label}
-                    className="w-full h-auto"
-                  />
-                </div>
-                <div className="w-full text-b2 text-black uppercase mt-3">
-                  {service.label}
-                </div>
-              </TransitionLink>
-            ))}
+        <div className="pl-4">
+          <div
+            ref={sliderRef}
+            className="lg:hidden -mx-6 md:-mx-10 mt-4 overflow-x-auto no-scrollbar snap-x snap-mandatory"
+          >
+            <div className="flex gap-4 px-6 md:px-10 items-end">
+              {[...services, ...services].map((service, index) => (
+                <TransitionLink
+                  key={`${service.label}-${index}`}
+                  href={service.href}
+                  className="relative shrink-0 snap-start w-[70vw] max-w-[300px]"
+                >
+                  <div className="bg-[#FDFDFD]">
+                    <Image
+                      src={service.image}
+                      alt={service.label}
+                      className="w-full h-auto"
+                    />
+                  </div>
+                  <div className="w-full text-b2 text-black uppercase mt-3">
+                    {service.label}
+                  </div>
+                </TransitionLink>
+              ))}
+            </div>
           </div>
         </div>
 
-        <div className="relative min-h-[750px] lg:min-h-[850px] 2xl:min-h-[900px] w-full hidden md:block"></div>
+        <div className="relative min-h-[750px] 2xl:min-h-[900px] w-full hidden md:block"></div>
       </div>
+
+      <div
+        className={`hidden lg:block z-0 absolute w-screen -left-59.75 top-1/2 h-px bg-[#E8E8E8] opacity-100`}
+      ></div>
 
       <div
         ref={wrapperRef}

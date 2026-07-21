@@ -213,7 +213,7 @@ export function ListRenderComponent() {
 
   return (
     <div className="w-full mt-16">
-      <div className="md:hidden flex flex-col gap-12">
+      <div className="md:hidden flex flex-col gap-24">
         {rendersData.map((item, index) => (
           <div
             key={index}
@@ -456,7 +456,7 @@ export function ListRenderComponent() {
           </button>
 
           <div className="flex-1 flex flex-col min-h-0">
-            <div className="flex-1 relative flex items-center justify-start pt-16 pb-16 md:pt-8 md:pb-20 md:mr-40 overflow-hidden z-10 min-h-0">
+            <div className="flex-1 relative flex items-center justify-center md:justify-start pt-24 pb-16 md:pt-8 md:pb-20 md:mr-40 overflow-hidden z-10 min-h-0">
               <AnimatePresence
                 mode="popLayout"
                 custom={direction}
@@ -473,23 +473,25 @@ export function ListRenderComponent() {
                     duration: 0.5,
                     ease: [0.32, 0.72, 0, 1],
                   }}
-                  className="relative w-full md:w-auto md:h-full md:max-w-full"
+                  className="relative w-full h-full md:w-auto md:h-full md:max-w-full"
                 >
-                  <div className="w-full md:h-full md:overflow-hidden">
+                  <div className="w-full h-full overflow-hidden px-6 lg:px-0">
                     <Image
                       src={selectedItem!.detailImages[imageIndex]}
                       alt={`${selectedItem!.title} detail ${imageIndex + 1}`}
-                      className="w-full h-auto md:h-full md:w-auto md:max-w-none object-cover"
+                      className="w-auto h-full md:w-auto md:max-w-none object-cover"
                     />
                   </div>
-                  <span className="absolute right-4 md:right-0 -bottom-10 text-[#8C8C8C] text-sh1 tracking-widest">
-                    {imageIndex + 1} / {selectedItem!.detailImages.length}
-                  </span>
+                  <div className="w-full flex lg:justify-end justify-center mt-9 lg:absolute lg:right-4 md:right-0 lg:-bottom-10">
+                    <span className="text-[#8C8C8C] text-sh1 tracking-widest">
+                      {imageIndex + 1} / {selectedItem!.detailImages.length}
+                    </span>
+                  </div>
                 </motion.div>
               </AnimatePresence>
             </div>
 
-            <div className="flex md:hidden items-center justify-center gap-2 py-10">
+            <div className="flex md:hidden items-center justify-center gap-2 py-7">
               <button
                 onClick={handlePrev}
                 className="w-[48px] h-[48px] rounded-full border border-[#E8E8E8] flex items-center justify-center text-[#8C8C8C] hover:text-black hover:border-black transition-colors bg-white"
