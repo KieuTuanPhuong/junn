@@ -12,16 +12,34 @@ import { useScrollReveal } from "@/lib/useScrollReveal"
 
 const services = [
   { image: thumbnailRenders, label: "Renders", href: "/renders" },
-  { image: thumbnailAnimation, label: "3D Animation", href: "/3d-animation" },
-  { image: thumbnailBranding, label: "Branding", href: "/branding" },
-  { image: thumbnailWebsite, label: "Websites", href: "/websites" },
-  { image: thumbnailBrochure, label: "Brochure", href: "/brochure" },
+  {
+    image: thumbnailAnimation,
+    label: "3D Animation",
+    href: "https://aurum-demo-six.vercel.app/",
+  },
+  {
+    image: thumbnailBranding,
+    label: "Branding",
+    href: "https://aurum-demo-six.vercel.app/home",
+  },
+  {
+    image: thumbnailWebsite,
+    label: "Websites",
+    href: "https://aurum-demo-six.vercel.app/home",
+  },
+  {
+    image: thumbnailBrochure,
+    label: "Brochure",
+    href: "https://aurum-demo-six.vercel.app/home",
+  },
 ]
 
 export function WhatWeDoSection() {
   const sectionRef = useRef<HTMLElement>(null)
   const wrapperRef = useRef<HTMLDivElement>(null)
   const spacerRef = useRef<HTMLDivElement>(null)
+  const sliderRef = useRef<HTMLDivElement>(null)
+  const sliderPausedRef = useRef(false)
   const [leftOffset, setLeftOffset] = useState(0)
   const [rowWidth, setRowWidth] = useState(0)
 
@@ -41,6 +59,42 @@ export function WhatWeDoSection() {
     handleResize()
     window.addEventListener("resize", handleResize)
     return () => window.removeEventListener("resize", handleResize)
+  }, [])
+
+  useEffect(() => {
+    const slider = sliderRef.current
+    if (!slider) return
+
+    const pause = () => {
+      sliderPausedRef.current = true
+    }
+    const resume = () => {
+      sliderPausedRef.current = false
+    }
+
+    slider.addEventListener("touchstart", pause, { passive: true })
+    slider.addEventListener("touchend", resume, { passive: true })
+
+    const interval = setInterval(() => {
+      // offsetWidth 0 = hidden on lg, skip
+      if (sliderPausedRef.current || slider.offsetWidth === 0) return
+
+      const card = slider.querySelector<HTMLElement>(".snap-start")
+      if (!card) return
+      const step = card.offsetWidth + 16
+      const setWidth = step * services.length
+      // past first set: jump back one set (identical content, invisible) before advancing
+      if (slider.scrollLeft >= setWidth) {
+        slider.scrollLeft -= setWidth
+      }
+      slider.scrollBy({ left: step, behavior: "smooth" })
+    }, 3000)
+
+    return () => {
+      clearInterval(interval)
+      slider.removeEventListener("touchstart", pause)
+      slider.removeEventListener("touchend", resume)
+    }
   }, [])
 
   return (
@@ -70,31 +124,40 @@ export function WhatWeDoSection() {
           </p>
         </div>
 
-        <div className="lg:hidden -mx-6 md:-mx-10 mt-4 overflow-x-auto no-scrollbar snap-x snap-mandatory">
-          <div className="flex gap-4 px-6 md:px-10 items-end">
-            {services.map((service) => (
-              <TransitionLink
-                key={service.label}
-                href={service.href}
-                className="relative shrink-0 snap-start w-[70vw] max-w-[300px]"
-              >
-                <div className="bg-[#FDFDFD]">
-                  <Image
-                    src={service.image}
-                    alt={service.label}
-                    className="w-full h-auto"
-                  />
-                </div>
-                <div className="w-full text-b2 text-black uppercase mt-3">
-                  {service.label}
-                </div>
-              </TransitionLink>
-            ))}
+        <div className="pl-4">
+          <div
+            ref={sliderRef}
+            className="lg:hidden -mx-6 md:-mx-10 mt-4 overflow-x-auto no-scrollbar snap-x snap-mandatory"
+          >
+            <div className="flex gap-4 px-6 md:px-10 items-end">
+              {[...services, ...services].map((service, index) => (
+                <TransitionLink
+                  key={`${service.label}-${index}`}
+                  href={service.href}
+                  className="relative shrink-0 snap-start w-[70vw] max-w-[300px]"
+                >
+                  <div className="bg-[#FDFDFD]">
+                    <Image
+                      src={service.image}
+                      alt={service.label}
+                      className="w-full h-auto"
+                    />
+                  </div>
+                  <div className="w-full text-b2 text-black uppercase mt-3">
+                    {service.label}
+                  </div>
+                </TransitionLink>
+              ))}
+            </div>
           </div>
         </div>
 
-        <div className="relative min-h-[750px] w-full hidden md:block"></div>
+        <div className="relative min-h-[750px] 2xl:min-h-[900px] w-full hidden md:block"></div>
       </div>
+
+      <div
+        className={`hidden lg:block z-0 absolute w-screen -left-59.75 top-1/2 h-px bg-[#E8E8E8] opacity-100`}
+      ></div>
 
       <div
         ref={wrapperRef}
@@ -134,7 +197,7 @@ export function WhatWeDoSection() {
                 />
               </div>
               <TransitionLink
-                href="/3d-animation"
+                href="https://aurum-demo-six.vercel.app/"
                 className="absolute left-1/2 bottom-4 -translate-x-1/2 -translate-y-1/2 z-10 pointer-events-none group-hover/card:pointer-events-auto opacity-0 group-hover/card:opacity-100 transition-all duration-500 ease-out group flex w-[197px] h-10 py-4 px-4 items-center justify-center uppercase tracking-widest text-b3-regular text-white backdrop-blur-[7.5px] bg-[rgba(255,255,255,0.35)] hover:bg-[rgba(255,255,255,0.45)]"
               >
                 <span className="w-0 h-2 rounded-full bg-white opacity-0 scale-0 mr-0 group-hover:w-2 group-hover:opacity-100 group-hover:scale-100 group-hover:mr-2 transition-all duration-500 ease-out"></span>
@@ -155,7 +218,7 @@ export function WhatWeDoSection() {
                 />
               </div>
               <TransitionLink
-                href="/branding"
+                href="https://aurum-demo-six.vercel.app/home"
                 className="absolute left-1/2 bottom-4 -translate-x-1/2 -translate-y-1/2 z-10 pointer-events-none group-hover/card:pointer-events-auto opacity-0 group-hover/card:opacity-100 transition-all duration-500 ease-out group flex w-20 h-10 py-4 px-4 items-center justify-center uppercase tracking-widest text-b3-regular text-white backdrop-blur-[7.5px] bg-[rgba(255,255,255,0.35)] hover:bg-[rgba(255,255,255,0.45)]"
               >
                 <span className="w-0 h-2 rounded-full bg-white opacity-0 scale-0 mr-0 group-hover:w-2 group-hover:opacity-100 group-hover:scale-100 group-hover:mr-2 transition-all duration-500 ease-out"></span>
@@ -176,7 +239,7 @@ export function WhatWeDoSection() {
                 />
               </div>
               <TransitionLink
-                href="/websites"
+                href="https://aurum-demo-six.vercel.app/home"
                 className="absolute left-1/2 bottom-4 -translate-x-1/2 -translate-y-1/2 z-10 pointer-events-none group-hover/card:pointer-events-auto opacity-0 group-hover/card:opacity-100 transition-all duration-500 ease-out group flex w-20 h-10 py-4 px-4 items-center justify-center uppercase tracking-widest text-b3-regular text-white backdrop-blur-[7.5px] bg-[rgba(255,255,255,0.35)] hover:bg-[rgba(255,255,255,0.45)]"
               >
                 <span className="w-0 h-2 rounded-full bg-white opacity-0 scale-0 mr-0 group-hover:w-2 group-hover:opacity-100 group-hover:scale-100 group-hover:mr-2 transition-all duration-500 ease-out"></span>
@@ -197,7 +260,7 @@ export function WhatWeDoSection() {
                 />
               </div>
               <TransitionLink
-                href="/brochure"
+                href="https://aurum-demo-six.vercel.app/home"
                 className="absolute left-1/2 bottom-4 -translate-x-1/2 -translate-y-1/2 z-10 pointer-events-none group-hover/card:pointer-events-auto opacity-0 group-hover/card:opacity-100 transition-all duration-500 ease-out group flex w-20 h-10 py-4 px-4 items-center justify-center uppercase tracking-widest text-b3-regular text-white backdrop-blur-[7.5px] bg-[rgba(255,255,255,0.35)] hover:bg-[rgba(255,255,255,0.45)]"
               >
                 <span className="w-0 h-2 rounded-full bg-white opacity-0 scale-0 mr-0 group-hover:w-2 group-hover:opacity-100 group-hover:scale-100 group-hover:mr-2 transition-all duration-500 ease-out"></span>

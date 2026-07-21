@@ -43,8 +43,9 @@ const urbanist = Urbanist({
 })
 
 export const metadata: Metadata = {
-  title: "AURUM | 97 Ahumoana Drive",
-  description: "Luxury House and Land package at 97 Ahumoana Drive, Weiti Bay.",
+  title: "Jünn | 97 Ahumoana Drive",
+  description:
+    "We built JÜNN around a simple idea — that high quality, fast turnaround, and a straightforward process are not mutually exclusive. The right team, the right systems, and a genuine passion for the work can deliver great outcomes without the complexity.",
 }
 
 export default function RootLayout({

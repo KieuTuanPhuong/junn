@@ -1,7 +1,8 @@
 "use client"
 
-import { useEffect, useLayoutEffect, useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import Image from "next/image"
+import { AnimatePresence, motion } from "framer-motion"
 import { gsap } from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
 
@@ -11,6 +12,19 @@ import malibu from "@/public/images/renders/malibu.png"
 import aurum from "@/public/images/renders/aurum.png"
 import mcgrathResidence2 from "@/public/images/renders/mcgrath_residence_2.png"
 import { cn } from "@/lib/utils"
+
+import aboutUsThumbnail from "@/public/images/aboutus-thumbnail.png"
+import homeHereImage from "@/public/images/home-here-image.png"
+import stepBrief from "@/public/images/step-brief.png"
+import stepDelivery from "@/public/images/step-delivery.png"
+import stepFirstLook from "@/public/images/step-first-look.png"
+import stepMeet from "@/public/images/step-meet.png"
+import stepYourFiles from "@/public/images/step-your-files.png"
+import thumbnailAnimation from "@/public/images/thumbnail-animation.png"
+import thumbnailBranding from "@/public/images/thumbnail-branding.png"
+import thumbnailBrochure from "@/public/images/thumbnail-brochure.png"
+import thumbnailRenders from "@/public/images/thumbnail-renders.png"
+import thumbnailWebsite from "@/public/images/thumbnail-website.png"
 
 // aside is max-w-[239px] + 1px divide border, visible from the xl breakpoint (1280px) up
 const SIDEBAR_WIDTH = 240
@@ -23,6 +37,7 @@ const rendersData = [
     title: "McGrath Residence",
     image: mcgrathResidence,
     slug: "mcgrath-residence",
+    detailImages: [aboutUsThumbnail, homeHereImage],
   },
   {
     id: "2",
@@ -30,6 +45,13 @@ const rendersData = [
     title: "Solace",
     image: solace,
     slug: "solace",
+    detailImages: [
+      stepBrief,
+      stepDelivery,
+      thumbnailAnimation,
+      stepFirstLook,
+      thumbnailBranding,
+    ],
   },
   {
     id: "3",
@@ -37,6 +59,13 @@ const rendersData = [
     title: "Malibu",
     image: malibu,
     slug: "malibu",
+    detailImages: [
+      stepMeet,
+      thumbnailBrochure,
+      thumbnailRenders,
+      stepBrief,
+      thumbnailWebsite,
+    ],
   },
   {
     id: "4",
@@ -44,6 +73,13 @@ const rendersData = [
     title: "Aurum",
     image: aurum,
     slug: "aurum",
+    detailImages: [
+      aboutUsThumbnail,
+      stepBrief,
+      thumbnailAnimation,
+      homeHereImage,
+      stepDelivery,
+    ],
   },
   {
     id: "5",
@@ -51,27 +87,41 @@ const rendersData = [
     title: "McGrath Residence",
     image: mcgrathResidence2,
     slug: "mcgrath-residence-2",
+    detailImages: [stepFirstLook, thumbnailBranding, stepMeet],
   },
 ]
 
-// clone of the last slide prepended and the first slide appended so the
-// slider can animate straight through the boundary and snap back invisibly
-const extendedRendersData = [
-  rendersData[rendersData.length - 1],
-  ...rendersData,
-  rendersData[0],
-]
+const slideVariants = {
+  enter: (direction: number) => ({
+    x: direction > 0 ? "100%" : "-100%",
+    opacity: 0,
+  }),
+  center: { x: 0, opacity: 1 },
+  exit: (direction: number) => ({
+    x: direction > 0 ? "-100%" : "100%",
+    opacity: 0,
+  }),
+}
 
 export function ListRenderComponent() {
   const anchorRef = useRef<HTMLDivElement>(null)
   const itemRefs = useRef<(HTMLDivElement | null)[]>([])
-  const trackRef = useRef<HTMLDivElement>(null)
-  const prevSelectedIndexRef = useRef<number | null>(null)
   const [bleed, setBleed] = useState<{ left: number; width: number }>({
     left: 0,
     width: 0,
   })
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null)
+  const [imageIndex, setImageIndex] = useState(0)
+  // 1 = next, -1 = prev; drives the slide-in direction of the image animation
+  const [direction, setDirection] = useState(1)
+
+  const selectedItem =
+    selectedIndex !== null ? rendersData[selectedIndex] : null
+
+  const openViewer = (index: number) => {
+    setImageIndex(0)
+    setSelectedIndex(index)
+  }
 
   useEffect(() => {
     if (selectedIndex !== null) {
@@ -84,58 +134,20 @@ export function ListRenderComponent() {
     }
   }, [selectedIndex])
 
-  useLayoutEffect(() => {
-    const el = trackRef.current
-    const total = rendersData.length
-    const prevSelected = prevSelectedIndexRef.current
-
-    if (selectedIndex === null || !el) {
-      prevSelectedIndexRef.current = selectedIndex
-      return
-    }
-
-    if (prevSelected === null) {
-      gsap.set(el, { xPercent: -(selectedIndex + 1) * 100 })
-      prevSelectedIndexRef.current = selectedIndex
-      return
-    }
-
-    const wrapForward = prevSelected === total - 1 && selectedIndex === 0
-    const wrapBackward = prevSelected === 0 && selectedIndex === total - 1
-    const targetPos = wrapForward
-      ? total + 1
-      : wrapBackward
-        ? 0
-        : selectedIndex + 1
-
-    gsap.to(el, {
-      xPercent: -targetPos * 100,
-      duration: 0.6,
-      ease: "power3.inOut",
-      onComplete: () => {
-        if (wrapForward || wrapBackward) {
-          gsap.set(el, { xPercent: -(selectedIndex + 1) * 100 })
-        }
-      },
-    })
-
-    prevSelectedIndexRef.current = selectedIndex
-  }, [selectedIndex])
-
   const handleNext = (e: React.MouseEvent) => {
     e.stopPropagation()
-    setSelectedIndex((prev) =>
-      prev === null ? null : (prev + 1) % rendersData.length,
-    )
+    if (selectedIndex === null) return
+    setDirection(1)
+    const total = rendersData[selectedIndex].detailImages.length
+    setImageIndex((prev) => (prev + 1) % total)
   }
 
   const handlePrev = (e: React.MouseEvent) => {
     e.stopPropagation()
-    setSelectedIndex((prev) =>
-      prev === null
-        ? null
-        : (prev - 1 + rendersData.length) % rendersData.length,
-    )
+    if (selectedIndex === null) return
+    setDirection(-1)
+    const total = rendersData[selectedIndex].detailImages.length
+    setImageIndex((prev) => (prev - 1 + total) % total)
   }
 
   useEffect(() => {
@@ -201,12 +213,12 @@ export function ListRenderComponent() {
 
   return (
     <div className="w-full mt-16">
-      <div className="md:hidden flex flex-col gap-12">
+      <div className="md:hidden flex flex-col gap-24">
         {rendersData.map((item, index) => (
           <div
             key={index}
             data-reveal
-            onClick={() => setSelectedIndex(index)}
+            onClick={() => openViewer(index)}
             className="flex flex-col gap-4 cursor-pointer"
           >
             <div className="flex flex-col gap-2">
@@ -237,7 +249,7 @@ export function ListRenderComponent() {
                 ref={(el) => {
                   itemRefs.current[index] = el
                 }}
-                onClick={() => setSelectedIndex(index)}
+                onClick={() => openViewer(index)}
                 className="flex group w-full cursor-pointer"
               >
                 <div
@@ -292,7 +304,7 @@ export function ListRenderComponent() {
                 ref={(el) => {
                   itemRefs.current[index] = el
                 }}
-                onClick={() => setSelectedIndex(index)}
+                onClick={() => openViewer(index)}
                 className="flex group w-full cursor-pointer"
               >
                 <div className="flex-1 border-r border-[#E8E8E8]"></div>
@@ -336,7 +348,7 @@ export function ListRenderComponent() {
                 ref={(el) => {
                   itemRefs.current[index] = el
                 }}
-                onClick={() => setSelectedIndex(index)}
+                onClick={() => openViewer(index)}
                 className="flex group w-full cursor-pointer"
               >
                 <div className="flex-1 border-r border-[#E8E8E8]"></div>
@@ -379,7 +391,7 @@ export function ListRenderComponent() {
                 ref={(el) => {
                   itemRefs.current[index] = el
                 }}
-                onClick={() => setSelectedIndex(index)}
+                onClick={() => openViewer(index)}
                 className="flex group w-full cursor-pointer"
               >
                 <div className="flex-1 border-r border-[#E8E8E8]"></div>
@@ -443,32 +455,81 @@ export function ListRenderComponent() {
             </svg>
           </button>
 
-          <div className="flex-1 flex">
-            <div className="flex-1 relative flex items-center justify-center pt-8 pb-20 mr-6 md:mr-40 overflow-hidden z-10">
-              <div ref={trackRef} className="flex w-full h-full">
-                {extendedRendersData.map((item, index) => {
-                  return (
-                    <div
-                      key={index}
-                      className="w-full h-full shrink-0 flex items-center justify-start"
-                    >
-                      <div className="relative h-full max-w-[80%] inline-block">
-                        <Image
-                          src={item.image}
-                          alt={item.title}
-                          className="h-full w-auto object-cover"
-                        />
-                        <span className="absolute right-0 -bottom-10 text-[#8C8C8C] text-sh1 tracking-widest">
-                          {index} / {rendersData.length}
-                        </span>
-                      </div>
-                    </div>
-                  )
-                })}
-              </div>
+          <div className="flex-1 flex flex-col min-h-0">
+            <div className="flex-1 relative flex items-center justify-center md:justify-start pt-24 pb-16 md:pt-8 md:pb-20 md:mr-40 overflow-hidden z-10 min-h-0">
+              <AnimatePresence
+                mode="popLayout"
+                custom={direction}
+                initial={false}
+              >
+                <motion.div
+                  key={imageIndex}
+                  custom={direction}
+                  variants={slideVariants}
+                  initial="enter"
+                  animate="center"
+                  exit="exit"
+                  transition={{
+                    duration: 0.5,
+                    ease: [0.32, 0.72, 0, 1],
+                  }}
+                  className="relative w-full h-full md:w-auto md:h-full md:max-w-full"
+                >
+                  <div className="w-full h-full overflow-hidden px-6 lg:px-0">
+                    <Image
+                      src={selectedItem!.detailImages[imageIndex]}
+                      alt={`${selectedItem!.title} detail ${imageIndex + 1}`}
+                      className="w-auto h-full md:w-auto md:max-w-none object-cover"
+                    />
+                  </div>
+                  <div className="w-full flex lg:justify-end justify-center mt-9 lg:absolute lg:right-4 md:right-0 lg:-bottom-10">
+                    <span className="text-[#8C8C8C] text-sh1 tracking-widest">
+                      {imageIndex + 1} / {selectedItem!.detailImages.length}
+                    </span>
+                  </div>
+                </motion.div>
+              </AnimatePresence>
             </div>
 
-            <div className="absolute right-0 bottom-1/5 translate-y-[12px] flex flex-col items-end gap-6 z-5">
+            <div className="flex md:hidden items-center justify-center gap-2 py-7">
+              <button
+                onClick={handlePrev}
+                className="w-[48px] h-[48px] rounded-full border border-[#E8E8E8] flex items-center justify-center text-[#8C8C8C] hover:text-black hover:border-black transition-colors bg-white"
+              >
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <path d="M19 12H5M12 19l-7-7 7-7" />
+                </svg>
+              </button>
+
+              <button
+                onClick={handleNext}
+                className="w-[48px] h-[48px] rounded-full border border-[#E8E8E8] flex items-center justify-center text-[#8C8C8C] hover:text-black hover:border-black transition-colors bg-white"
+              >
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <path d="M5 12h14M12 5l7 7-7 7" />
+                </svg>
+              </button>
+            </div>
+
+            <div className="hidden md:flex absolute right-0 bottom-1/5 translate-y-[12px] flex-col items-end gap-6 z-5">
               <div className="flex items-center relative z-5">
                 <div className="flex gap-2 px-10">
                   <button

@@ -38,8 +38,12 @@ export function AboutUsSection() {
 
         <div className="relative min-h-[438px] w-full hidden md:block"></div>
 
-        <div data-reveal className="w-full flex justify-end">
-          <div className="flex flex-col gap-3 max-w-[400px] pb-20">
+        {/* lg:pr mirrors the image's right-1/5 offset: 20% of section width = 2/9 of this column - px-10 correction */}
+        <div
+          data-reveal
+          className="w-full flex justify-end lg:pr-[calc(22.2222%-1.5rem)]"
+        >
+          <div className="flex flex-col gap-3 max-w-[400px] pb-20 px-6 md:px-10 lg:px-0">
             <p className="text-b3-regular text-[#8C8C8C] mt-5">
               We understand that getting great creative work produced is rarely
               as simple as it should be. So we made it a point to change that.
@@ -62,14 +66,14 @@ export function AboutUsSection() {
             </p>
           </div>
         </div>
+      </div>
 
-        <div className="relative -mx-6 md:-mx-10 lg:mx-0 lg:absolute lg:translate-y-[35%] lg:left-0 lg:-right-10 lg:inset-y-0 lg:w-auto">
-          <Image
-            src={aboutUsThumbnail}
-            alt="About Us"
-            className="w-full h-auto lg:h-[400px] object-cover"
-          />
-        </div>
+      <div className="relative -mx-6 md:-mx-10 lg:mx-0 lg:absolute lg:translate-y-[38%] lg:left-10 lg:right-1/5 lg:inset-y-0 lg:w-auto">
+        <Image
+          src={aboutUsThumbnail}
+          alt="About Us"
+          className="w-full h-auto lg:h-[400px] object-cover"
+        />
       </div>
     </section>
   )

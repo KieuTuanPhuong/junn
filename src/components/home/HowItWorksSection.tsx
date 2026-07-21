@@ -102,31 +102,34 @@ export function HowItWorksSection() {
               <div
                 key={idx}
                 onMouseEnter={() => setActive(idx)}
-                className="flex gap-4 md:gap-8 group relative cursor-pointer min-h-30"
+                className="flex gap-7 md:gap-8 group relative cursor-pointer min-h-30"
               >
-                <div className="flex flex-col gap-2 w-16 md:w-32 shrink-0  px-6 md:px-10 lg:px-14">
-                  <span className="text-[#8C8C8C] text-sh2">{step.num}</span>
-                  <h3 className="text-h3 text-black font-gabarito max-lg:[writing-mode:vertical-rl]">
-                    {step.title}
-                  </h3>
-                </div>
-                <div className="flex flex-col gap-2">
-                  <span className="text-[#8C8C8C] text-sh2 invisible">
-                    {step.num}
-                  </span>
-                  <p className="text-b3-regular text-[#4B4B4B] max-w-md">
-                    {step.desc}
-                  </p>
-
-                  <div className="lg:hidden relative w-full aspect-4/3 mt-4 overflow-hidden bg-neutral-100">
-                    <Image
-                      src={step.image}
-                      alt={step.title}
-                      fill
-                      sizes="100vw"
-                      className="object-cover"
-                    />
+                <div className="flex flex-col lg:flex-row gap-10 lg:gap-4">
+                  <div className="flex flex-col gap-2 w-16 md:w-56 shrink-0 px-0 md:px-10 lg:px-14">
+                    <span className="text-[#8C8C8C] text-sh2">{step.num}</span>
+                    <h3 className="text-h3 text-black font-gabarito">
+                      {step.title}
+                    </h3>
                   </div>
+
+                  <div className="flex flex-col gap-2">
+                    <span className="text-[#8C8C8C] text-sh2 invisible">
+                      {step.num}
+                    </span>
+                    <p className="text-b3-regular text-[#4B4B4B] max-w-md">
+                      {step.desc}
+                    </p>
+                  </div>
+                </div>
+
+                <div className="lg:hidden relative w-full max-w-[95px] aspect-3/9 overflow-hidden bg-neutral-100">
+                  <Image
+                    src={step.image}
+                    alt={step.title}
+                    fill
+                    sizes="100vw"
+                    className="object-cover"
+                  />
                 </div>
 
                 <span className="hidden lg:block absolute z-10 w-2.5 h-2.5 bottom-[-4.5px] left-[-5.55px] rounded-full bg-[#E8E8E8] opacity-0 transition-all duration-500 ease-out group-hover:opacity-100 group-hover:scale-100"></span>
